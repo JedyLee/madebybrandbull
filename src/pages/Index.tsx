@@ -4,7 +4,30 @@ import { projects } from "@/data/projects";
 
 const Index = () => {
   const featured = projects[0];
-  const rest = projects.slice(1, 5);
+
+  const selected = [
+    {
+      to: "/work",
+      image: projects[1].image,
+      category: "Brands",
+      title: "Well Curated Brand Strategy",
+      year: projects[1].year,
+    },
+    {
+      to: "/work",
+      image: projects[2].image,
+      category: "Editorial",
+      title: "Cassona Magazine",
+      year: projects[2].year,
+    },
+    {
+      to: "/work#typography",
+      image: projects[3].image,
+      category: "Typography",
+      title: "Full Access to Text Options",
+      year: projects[3].year,
+    },
+  ];
 
   return (
     <>
@@ -13,7 +36,7 @@ const Index = () => {
         <div className="flex items-center justify-between text-xs uppercase tracking-[0.25em] text-muted-foreground">
           <span>Issue N°07 — Spring 2026</span>
           <span className="hidden md:inline">A graphic design portfolio</span>
-          <span>Paris · 48.85° N</span>
+          <span>Ghana · 5.55° N</span>
         </div>
         <div className="rule mt-4" />
 
@@ -21,13 +44,13 @@ const Index = () => {
           <h1 className="display-bold col-span-12 text-[18vw] md:text-[14vw] leading-[0.82]">
             Form,<br />
             <span className="italic font-light">function</span><br />
-            &amp; ink.
+            &amp; Design.
           </h1>
         </div>
 
         <div className="grid grid-cols-12 gap-4 md:gap-6 mt-10 md:mt-14 border-t border-foreground/15 pt-6">
           <p className="col-span-12 md:col-span-5 text-base md:text-lg leading-relaxed">
-            I&apos;m <strong className="font-semibold">Élise Marchand</strong>, an independent
+            I&apos;m <strong className="font-semibold">Jedidiah Ingram</strong>, an independent
             graphic designer crafting brand identities, editorial systems and
             print objects with a quiet, considered hand.
           </p>
@@ -89,12 +112,12 @@ const Index = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
-          {rest.map((p, i) => (
+          {selected.map((p, i) => (
             <Link
-              key={p.id}
-              to="/work"
+              key={p.title}
+              to={p.to}
               className={`group block ${
-                i === 0 ? "md:col-span-7" : i === 1 ? "md:col-span-5" : "md:col-span-4"
+                i === 0 ? "md:col-span-7" : i === 1 ? "md:col-span-5" : "md:col-span-12"
               }`}
             >
               <div className="overflow-hidden bg-paper-soft">
@@ -123,12 +146,11 @@ const Index = () => {
       <section className="container pt-24 pb-12">
         <div className="border-y border-foreground/15 py-12 md:py-20">
           <p className="display text-3xl md:text-6xl max-w-5xl">
-            &ldquo;Design isn&apos;t loud. It&apos;s the&nbsp;
-            <span className="italic">quiet confidence</span> of a thing made
-            with care.&rdquo;
+            &ldquo;Instead of saying no to everything, try to say&nbsp;
+            <span className="italic">yes</span> and figure out how.&rdquo;
           </p>
           <div className="eyebrow text-muted-foreground mt-8">
-            — Élise, on practice
+            — Bjarke Ingels
           </div>
         </div>
       </section>
