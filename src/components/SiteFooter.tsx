@@ -20,7 +20,7 @@ export const SiteFooter = () => {
 
       <div className="container py-10 grid gap-8 md:grid-cols-4 text-sm">
         <div className="md:col-span-2">
-          <div className="display-bold text-2xl">Atelier Noir</div>
+          <div className="display-bold text-2xl">Brand Bull</div>
           <p className="text-muted-foreground mt-2 max-w-sm">
             Independent graphic design studio working with founders, museums and
             considered brands.
@@ -41,13 +41,13 @@ export const SiteFooter = () => {
             <li><a href="#" className="hover:underline">Instagram</a></li>
             <li><a href="#" className="hover:underline">Are.na</a></li>
             <li><a href="#" className="hover:underline">Read.cv</a></li>
-            <li><a href="mailto:hello@ateliernoir.studio" className="hover:underline">hello@ateliernoir.studio</a></li>
+            <li><a href="mailto:hello@brandbull.studio" className="hover:underline">hello@brandbull.studio</a></li>
           </ul>
         </div>
       </div>
       <div className="container pb-8 flex flex-col md:flex-row md:justify-between gap-2 text-xs text-muted-foreground border-t border-foreground/10 pt-6">
-        <span>© {year} Atelier Noir. All rights reserved.</span>
-        <span>Designed in Paris · Printed on recycled paper.</span>
+        <span>© {year} Brand Bull. All rights reserved.</span>
+        <span>Designed in Ghana · Printed on recycled paper.</span>
       </div>
     </footer>
   );

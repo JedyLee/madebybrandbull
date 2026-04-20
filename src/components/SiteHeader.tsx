@@ -20,9 +20,9 @@ export const SiteHeader = () => {
           className="flex items-baseline gap-2 group"
           onClick={() => setOpen(false)}
         >
-          <span className="display-bold text-xl md:text-2xl">Atelier&nbsp;Noir</span>
+          <span className="display-bold text-xl md:text-2xl">Brand&nbsp;Bull</span>
           <span className="hidden md:inline text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            Studio · Est. 2019
+            Studio · Est. 2024
           </span>
         </Link>
 

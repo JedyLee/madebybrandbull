@@ -66,8 +66,8 @@ export const brandingBrands: Brand[] = [
 // Editorial — 2 brands × 2 images each
 export const editorialBrands: Brand[] = [
   {
-    id: "wost-folus",
-    name: "Wost Folus Magazine",
+    id: "cassona",
+    name: "Cassona Magazine",
     headline: "Slow architecture, on uncoated cream stock.",
     subtext:
       "Lorem ipsum dolor sit amet. Quarterly editorial system, typographic grid and cover art-direction.",
