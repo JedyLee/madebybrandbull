@@ -11,6 +11,90 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
+type SelectedItem = {
+  to: string;
+  image: string;
+  category: string;
+  title: string;
+  year: string;
+};
+
+const SelectedSlider = ({ items }: { items: SelectedItem[] }) => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    const onSelect = () => setCurrent(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
+  const active = items[current];
+
+  return (
+    <div>
+      <div className="relative bg-paper-soft">
+        <Carousel setApi={setApi} opts={{ loop: true }}>
+          <CarouselContent>
+            {items.map((p) => (
+              <CarouselItem key={p.title}>
+                <Link to={p.to} className="block group overflow-hidden">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    loading="lazy"
+                    width={1600}
+                    height={1000}
+                    className="w-full aspect-[4/5] md:aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </Link>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-4 top-1/2 h-10 w-10 rounded-none border-foreground/30 bg-paper/90 hover:bg-paper" />
+          <CarouselNext className="right-4 top-1/2 h-10 w-10 rounded-none border-foreground/30 bg-paper/90 hover:bg-paper" />
+        </Carousel>
+      </div>
+
+      <div className="mt-5 flex items-start justify-between gap-6">
+        <div>
+          <div className="eyebrow text-muted-foreground">{active.category}</div>
+          <Link
+            to={active.to}
+            className="font-medium text-lg md:text-xl mt-1 inline-block hover:underline underline-offset-4"
+          >
+            {active.title}
+          </Link>
+        </div>
+        <div className="flex items-center gap-4 shrink-0">
+          <span className="text-xs text-muted-foreground uppercase tracking-[0.2em]">
+            {String(current + 1).padStart(2, "0")} /{" "}
+            {String(items.length).padStart(2, "0")}
+          </span>
+          <span className="text-xs text-muted-foreground">{active.year}</span>
+        </div>
+      </div>
+
+      <div className="mt-3 flex gap-1.5">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Go to slide ${i + 1}`}
+            onClick={() => api?.scrollTo(i)}
+            className={`h-[3px] flex-1 transition-colors ${
+              current === i ? "bg-foreground" : "bg-foreground/15"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Index = () => {
   const featured = projects[0];
 
