@@ -13,10 +13,11 @@ import {
 
 type SelectedItem = {
   to: string;
-  image: string;
+  image?: string;
   category: string;
   title: string;
   year: string;
+  render?: () => JSX.Element;
 };
 
 const SelectedSlider = ({ items }: { items: SelectedItem[] }) => {
@@ -43,14 +44,18 @@ const SelectedSlider = ({ items }: { items: SelectedItem[] }) => {
             {items.map((p) => (
               <CarouselItem key={p.title}>
                 <Link to={p.to} className="block group overflow-hidden">
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    loading="lazy"
-                    width={1600}
-                    height={1000}
-                    className="w-full aspect-[4/5] md:aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  />
+                  {p.render ? (
+                    p.render()
+                  ) : (
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      loading="lazy"
+                      width={1600}
+                      height={1000}
+                      className="w-full aspect-[4/5] md:aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                    />
+                  )}
                 </Link>
               </CarouselItem>
             ))}
@@ -115,10 +120,43 @@ const Index = () => {
     },
     {
       to: "/work#typography",
-      image: projects[3].image,
       category: "Typography",
       title: "Full Access to Text Options",
       year: projects[3].year,
+      render: () => (
+        <div className="w-full aspect-[4/5] md:aspect-[16/10] bg-paper-soft border border-foreground/10 flex flex-col">
+          <div className="flex items-center justify-between px-6 md:px-10 pt-6 md:pt-8 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            <span>Display Serif</span>
+            <span>Aa Bb Cc · 0—9</span>
+          </div>
+          <div className="flex-1 flex items-center justify-center px-6 md:px-10">
+            <span
+              className="text-center leading-none"
+              style={{
+                fontFamily: "'Instrument Serif', serif",
+                fontStyle: "italic",
+                fontSize: "clamp(3rem, 11vw, 9rem)",
+              }}
+            >
+              Quiet Confidence
+            </span>
+          </div>
+          <div className="flex items-end justify-between px-6 md:px-10 pb-6 md:pb-8 border-t border-foreground/10 pt-4">
+            <div>
+              <div className="eyebrow text-muted-foreground">Typeface</div>
+              <div
+                className="text-xl md:text-2xl mt-1"
+                style={{ fontFamily: "'Instrument Serif', serif" }}
+              >
+                Instrument Serif
+              </div>
+            </div>
+            <span className="text-xs text-muted-foreground uppercase tracking-[0.2em]">
+              + 7 more
+            </span>
+          </div>
+        </div>
+      ),
     },
   ];
 
