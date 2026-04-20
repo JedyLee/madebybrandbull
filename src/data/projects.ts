@@ -17,13 +17,13 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "klasif",
-    title: "Klasif Type Specimen",
-    client: "Klasif Foundry",
-    category: "Typography",
+    id: "well-curated-brand",
+    title: "Well Curated Brand Strategy",
+    client: "Brand Bull",
+    category: "Brands",
     year: "2025",
     image: work1,
-    blurb: "A 96-page printed specimen exploring the contrast between a serif display and a humanist sans.",
+    blurb: "A considered identity system built around a clear brand voice, a tight visual language, and the small details that make a brand feel inevitable.",
     size: "lg",
   },
   {
