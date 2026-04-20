@@ -1,6 +1,15 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 const Index = () => {
   const featured = projects[0];
@@ -111,35 +120,7 @@ const Index = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
-          {selected.map((p, i) => (
-            <Link
-              key={p.title}
-              to={p.to}
-              className={`group block ${
-                i === 0 ? "md:col-span-7" : i === 1 ? "md:col-span-5" : "md:col-span-12"
-              }`}
-            >
-              <div className="overflow-hidden bg-paper-soft">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                  width={1024}
-                  height={1024}
-                  className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              </div>
-              <div className="mt-3 flex items-baseline justify-between gap-4">
-                <div>
-                  <div className="eyebrow text-muted-foreground">{p.category}</div>
-                  <div className="font-medium mt-1">{p.title}</div>
-                </div>
-                <span className="text-xs text-muted-foreground">{p.year}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <SelectedSlider items={selected} />
       </section>
 
       {/* Editorial pull-quote */}
