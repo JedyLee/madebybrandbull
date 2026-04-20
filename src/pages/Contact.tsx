@@ -37,7 +37,7 @@ const Contact = () => {
             <div className="overflow-hidden bg-paper-soft max-w-sm">
               <img
                 src={portrait}
-                alt="Portrait of Élise Marchand"
+                alt="Portrait of Jedidiah Ingram"
                 width={1024}
                 height={1280}
                 loading="lazy"
@@ -48,21 +48,21 @@ const Contact = () => {
             <div className="space-y-1">
               <div className="eyebrow text-muted-foreground">Email</div>
               <a
-                href="mailto:hello@ateliernoir.studio"
+                href="mailto:hello@brandbull.studio"
                 className="display-bold text-2xl md:text-3xl block hover:underline underline-offset-4"
               >
-                hello@ateliernoir.studio
+                hello@brandbull.studio
               </a>
             </div>
 
             <div className="grid grid-cols-2 gap-6 text-sm">
               <div>
                 <div className="eyebrow text-muted-foreground mb-2">Studio</div>
-                <p>14 rue de Charonne<br />75011 Paris, France</p>
+                <p>Accra, Ghana<br />5.55° N · 0.17° W</p>
               </div>
               <div>
                 <div className="eyebrow text-muted-foreground mb-2">Hours</div>
-                <p>Mon — Fri<br />09h00 — 18h00 CET</p>
+                <p>Mon — Fri<br />09h00 — 18h00 GMT</p>
               </div>
               <div>
                 <div className="eyebrow text-muted-foreground mb-2">Social</div>
