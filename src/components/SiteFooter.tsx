@@ -1,17 +1,52 @@
 import { Link } from "react-router-dom";
+import block57 from "@/assets/clients/block57.png";
+import cassona from "@/assets/clients/cassona.png";
+import pateAChoux from "@/assets/clients/pate-a-choux.png";
+import fairway from "@/assets/clients/fairway.png";
+import cosmo from "@/assets/clients/cosmo.png";
+import neusoft from "@/assets/clients/neusoft.png";
+import mindray from "@/assets/clients/mindray.png";
+import fimex from "@/assets/clients/fimex.png";
+import saareYaa from "@/assets/clients/saare-yaa.png";
+import apmTerminals from "@/assets/clients/apm-terminals.png";
+
+const clients = [
+  { name: "Block 57 Cantonments", logo: block57 },
+  { name: "Cassona Healthcare Group", logo: cassona },
+  { name: "Pâte à Choux", logo: pateAChoux },
+  { name: "Fairway", logo: fairway },
+  { name: "Cosmo", logo: cosmo },
+  { name: "Neusoft", logo: neusoft },
+  { name: "Mindray", logo: mindray },
+  { name: "Fimex", logo: fimex },
+  { name: "Saare Yaa", logo: saareYaa },
+  { name: "APM Terminals", logo: apmTerminals },
+];
 
 export const SiteFooter = () => {
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-foreground/15 mt-24">
-      <div className="overflow-hidden border-b border-foreground/15">
-        <div className="marquee whitespace-nowrap py-8 flex">
+      <div className="overflow-hidden border-y border-foreground/15 bg-paper-soft">
+        <div className="container py-5 flex items-baseline justify-between">
+          <span className="eyebrow text-muted-foreground">Selected Clients</span>
+          <span className="text-xs text-muted-foreground">{clients.length} brands · 2024—{year}</span>
+        </div>
+        <div className="marquee whitespace-nowrap py-10 flex border-t border-foreground/10">
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex shrink-0">
-              {["Branding", "Editorial", "Type", "Packaging", "Art Direction", "Print"].map((w) => (
-                <span key={w} className="display-bold text-6xl md:text-8xl px-8">
-                  {w} —
-                </span>
+            <div key={i} className="flex shrink-0 items-center">
+              {clients.map((c) => (
+                <div
+                  key={`${i}-${c.name}`}
+                  className="px-10 md:px-16 flex items-center justify-center h-16 md:h-20"
+                >
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    loading="lazy"
+                    className="max-h-full max-w-[180px] md:max-w-[220px] w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                  />
+                </div>
               ))}
             </div>
           ))}
