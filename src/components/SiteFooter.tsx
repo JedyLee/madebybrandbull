@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import AutoScroll from "embla-carousel-auto-scroll";
 import { useRef } from "react";
 import block57 from "@/assets/clients/block57.png";
 import cassona from "@/assets/clients/cassona.png";
