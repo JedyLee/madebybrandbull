@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import useEmblaCarousel from "embla-carousel-react";
+import AutoScroll from "embla-carousel-auto-scroll";
+import { useRef } from "react";
 import block57 from "@/assets/clients/block57.png";
 import cassona from "@/assets/clients/cassona.png";
 import pateAChoux from "@/assets/clients/pate-a-choux.png";
@@ -25,6 +28,14 @@ const clients = [
 
 export const SiteFooter = () => {
   const year = new Date().getFullYear();
+  const autoScroll = useRef(
+    AutoScroll({ speed: 2, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
+  const [emblaRef] = useEmblaCarousel(
+    { loop: true, dragFree: true, align: "start", containScroll: false },
+    [autoScroll.current]
+  );
+
   return (
     <footer className="border-t border-foreground/15 mt-24">
       <div className="overflow-hidden border-y border-foreground/15 bg-paper-soft">
@@ -32,24 +43,26 @@ export const SiteFooter = () => {
           <span className="eyebrow text-muted-foreground">Selected Clients</span>
           <span className="text-xs text-muted-foreground">{clients.length} brands · 2024—{year}</span>
         </div>
-        <div className="marquee whitespace-nowrap py-10 flex border-t border-foreground/10">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex shrink-0 items-center">
-              {clients.map((c) => (
-                <div
-                  key={`${i}-${c.name}`}
-                  className="px-10 md:px-16 flex items-center justify-center h-16 md:h-20"
-                >
-                  <img
-                    src={c.logo}
-                    alt={c.name}
-                    loading="lazy"
-                    className="max-h-full max-w-[180px] md:max-w-[220px] w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
+        <div
+          className="overflow-hidden border-t border-foreground/10 cursor-grab active:cursor-grabbing"
+          ref={emblaRef}
+        >
+          <div className="flex py-10 items-center">
+            {[...clients, ...clients, ...clients].map((c, i) => (
+              <div
+                key={`${i}-${c.name}`}
+                className="px-10 md:px-16 flex items-center justify-center h-16 md:h-20 shrink-0"
+              >
+                <img
+                  src={c.logo}
+                  alt={c.name}
+                  loading="lazy"
+                  draggable={false}
+                  className="max-h-full max-w-[180px] md:max-w-[220px] w-auto object-contain opacity-80 hover:opacity-100 transition-opacity select-none pointer-events-none"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
