@@ -28,12 +28,12 @@ const clients = [
 
 export const SiteFooter = () => {
   const year = new Date().getFullYear();
-  const autoplay = useRef(
-    Autoplay({ delay: 0, stopOnInteraction: false, stopOnMouseEnter: true })
+  const autoScroll = useRef(
+    AutoScroll({ speed: 2, stopOnInteraction: false, stopOnMouseEnter: true })
   );
   const [emblaRef] = useEmblaCarousel(
     { loop: true, dragFree: true, align: "start", containScroll: false },
-    [autoplay.current]
+    [autoScroll.current]
   );
 
   return (
