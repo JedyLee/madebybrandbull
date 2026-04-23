@@ -7,6 +7,9 @@ import danna01 from "@/assets/brands/danna-bakes-01.webp";
 import danna02 from "@/assets/brands/danna-bakes-02.webp";
 import danna03 from "@/assets/brands/danna-bakes-03.webp";
 import danna04 from "@/assets/brands/danna-bakes-04.webp";
+import hydrasen01 from "@/assets/brands/hydrasen-01.webp";
+import hydrasen02 from "@/assets/brands/hydrasen-02.webp";
+import hydrasen05 from "@/assets/brands/hydrasen-05.webp";
 
 export type Brand = {
   id: string;
@@ -41,11 +44,11 @@ export const brandingBrands: Brand[] = [
   {
     id: "hydrasen",
     name: "Hydrasen",
-    headline: "Clean, hydrating, unmistakably modern.",
+    headline: "An identity for cleaner water, carried across oceans.",
     subtext:
-      "Identity and packaging direction for Hydrasen — a contemporary hydration brand with a calm, clinical visual language.",
+      "Brand identity for Hydrasen — a shipping company dedicated to water purification and sustainable transport of refining devices. The mark draws on flowing currents and clinical clarity to express the company's mission of cleaner, accessible water worldwide.",
     year: "2024",
-    images: [work2, work3, work4, work5],
+    images: [hydrasen01, hydrasen02, work4, work5],
   },
   {
     id: "esquire",
@@ -101,13 +104,13 @@ export const packagingBrands: Brand[] = [
     images: [work5, work1, work2, work3],
   },
   {
-    id: "danna-pkg",
-    name: "Danna Bakes",
-    headline: "Boxes, bags and a pastel sticker grammar.",
+    id: "hydrasen-pkg",
+    name: "Hydrasen",
+    headline: "Shipping cartons for water-refining devices.",
     subtext:
-      "Lorem ipsum dolor sit amet. Take-away packaging that feels like a small gift before you open it.",
+      "Packaging system for Hydrasen — protective shipping cartons that carry water purification and refining devices to ports around the world. A gradient sky-to-sea palette signals the brand's commitment to clean, sustainable water.",
     year: "2025",
-    images: [work1, work3, work4, work5],
+    images: [hydrasen05, work3, work4, work5],
   },
   {
     id: "mast-co",
