@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
+import sonsBallad from "@/assets/sound/sons-ballad.webp";
 import {
   Carousel,
   CarouselContent,
