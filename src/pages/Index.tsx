@@ -109,7 +109,7 @@ const Index = () => {
       to: "/work",
       image: sonsBallad,
       category: "Sound Engineering",
-      title: "Son's Ballad — 7\" Pressing",
+      title: "Self-pressed vinyl, mixed & mastered in-house",
       year: projects[1].year,
     },
     {
