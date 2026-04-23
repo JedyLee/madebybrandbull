@@ -3,6 +3,7 @@ import work2 from "@/assets/work-2.jpg";
 import work3 from "@/assets/work-3.jpg";
 import work4 from "@/assets/work-4.jpg";
 import work5 from "@/assets/work-5.jpg";
+import architectureForm from "@/assets/architecture/form-study-01.webp";
 
 export type Project = {
   id: string;
