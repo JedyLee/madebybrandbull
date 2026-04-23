@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "@/hooks/use-theme";
 
 const links = [
   { to: "/", label: "Index", end: true },
@@ -11,6 +12,7 @@ const links = [
 
 export const SiteHeader = () => {
   const [open, setOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10">
@@ -50,15 +52,31 @@ export const SiteHeader = () => {
               )}
             </NavLink>
           ))}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="p-2 -mr-2 opacity-60 hover:opacity-100 transition-opacity"
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
         </nav>
 
-        <button
-          className="md:hidden p-2 -mr-2"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="p-2"
+          >
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
+          <button
+            className="p-2 -mr-2"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (
