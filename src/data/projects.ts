@@ -18,13 +18,13 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "well-curated-brand",
-    title: "Well Curated Brand Strategy",
-    client: "Brand Bull",
-    category: "Brands",
+    id: "form-study",
+    title: "Form, Massing & Articulation",
+    client: "Studio Brief",
+    category: "Architecture",
     year: "2025",
-    image: work1,
-    blurb: "A considered identity system built around a clear brand voice, a tight visual language, and the small details that make a brand feel inevitable.",
+    image: architectureForm,
+    blurb: "An architectural study tracing a building from base form to final integration — segmenting mass, angling volumes, and resolving the composition into a community-focused design with better light, airflow and connection to its site.",
     size: "lg",
   },
   {
