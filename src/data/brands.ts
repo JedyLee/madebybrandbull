@@ -3,6 +3,10 @@ import work2 from "@/assets/work-2.jpg";
 import work3 from "@/assets/work-3.jpg";
 import work4 from "@/assets/work-4.jpg";
 import work5 from "@/assets/work-5.jpg";
+import danna01 from "@/assets/brands/danna-bakes-01.webp";
+import danna02 from "@/assets/brands/danna-bakes-02.webp";
+import danna03 from "@/assets/brands/danna-bakes-03.webp";
+import danna04 from "@/assets/brands/danna-bakes-04.webp";
 
 export type Brand = {
   id: string;
@@ -28,37 +32,37 @@ export const brandingBrands: Brand[] = [
   {
     id: "danna-bakes",
     name: "Danna Bakes",
-    headline: "A pastel romance for a Parisian pâtisserie.",
+    headline: "A sweet, confident identity for an artisan bakery.",
     subtext:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Identity, packaging and a tiny grammar of icons for an artisan bakery in the 11ème.",
+      "A full brand system for Danna Bakes — logo suite, packaging, social campaigns and seasonal collateral built around a bold pink palette and a playful display voice.",
     year: "2025",
-    images: [work1, work2, work3, work4],
+    images: [danna01, danna02, danna03, danna04],
   },
   {
-    id: "modern-pages",
-    name: "Modern Pages",
-    headline: "Editorial elegance for an independent publisher.",
+    id: "hydrasen",
+    name: "Hydrasen",
+    headline: "Clean, hydrating, unmistakably modern.",
     subtext:
-      "Lorem ipsum dolor sit amet. A serif-led wordmark, stationery system and a two-color print language for Modern Pages, Lyon.",
+      "Identity and packaging direction for Hydrasen — a contemporary hydration brand with a calm, clinical visual language.",
     year: "2024",
     images: [work2, work3, work4, work5],
   },
   {
-    id: "bdove",
-    name: "B/Dove Apothecary",
-    headline: "Quiet skincare, stripped to its essentials.",
+    id: "esquire",
+    name: "Esquire",
+    headline: "Tailored visual systems for a refined audience.",
     subtext:
-      "Lorem ipsum dolor sit amet. Monogram, label system and unboxing ritual for a Marais-based apothecary.",
-    year: "2025",
+      "Brand work for Esquire — a sharp editorial identity built on classic typography, generous spacing and a confident black-and-cream palette.",
+    year: "2024",
     images: [work3, work4, work5, work1],
   },
   {
-    id: "atelier-noir",
-    name: "Galerie Saint-Paul",
-    headline: "An exhibition identity that breathes.",
+    id: "ghana70",
+    name: "Ghana@70",
+    headline: "A national identity celebrating seven decades.",
     subtext:
-      "Lorem ipsum dolor sit amet. Yearly identity, signage and risograph posters for a contemporary art gallery.",
-    year: "2023",
+      "Concept identity for Ghana@70 — a commemorative system blending heritage motifs with contemporary type to mark seventy years of independence.",
+    year: "2027",
     images: [work4, work5, work1, work2],
   },
 ];
