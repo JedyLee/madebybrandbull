@@ -107,9 +107,9 @@ const Index = () => {
   const selected = [
     {
       to: "/work",
-      image: projects[1].image,
-      category: "Brands",
-      title: "Well Curated Brand Strategy",
+      image: sonsBallad,
+      category: "Sound Engineering",
+      title: "Son's Ballad — 7\" Pressing",
       year: projects[1].year,
     },
     {
