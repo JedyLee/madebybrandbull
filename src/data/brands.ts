@@ -81,9 +81,9 @@ export const editorialBrands: Brand[] = [
   {
     id: "cassona",
     name: "Cassona Magazine",
-    headline: "Slow architecture, on uncoated cream stock.",
+    headline: "Two magazine volumes for a medical company with a story to tell.",
     subtext:
-      "Lorem ipsum dolor sit amet. Quarterly editorial system, typographic grid and cover art-direction.",
+      "Cassona is a medical company I partnered with to art-direct and design their first two magazines — end-to-end editorial systems covering cover direction, typographic grids, long-form features and clinical infographics. Years of editorial work mean each spread reads with the calm authority the subject deserves.",
     year: "2025 — 2026",
     images: [cassona01, cassona02],
   },
