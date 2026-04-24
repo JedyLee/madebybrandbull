@@ -12,6 +12,8 @@ import hydrasen02 from "@/assets/brands/hydrasen-02.webp";
 import hydrasen05 from "@/assets/brands/hydrasen-05.webp";
 import dannaPkg03 from "@/assets/brands/danna-bakes-pkg-03.webp";
 import dannaPkg04 from "@/assets/brands/danna-bakes-pkg-04.webp";
+import esquire01 from "@/assets/brands/esquire-01.webp";
+import esquire02 from "@/assets/brands/esquire-02.webp";
 
 export type Brand = {
   id: string;
@@ -55,11 +57,11 @@ export const brandingBrands: Brand[] = [
   {
     id: "esquire",
     name: "Esquire",
-    headline: "Tailored visual systems for a refined audience.",
+    headline: "A refined identity for a luxury apartment complex.",
     subtext:
-      "Brand work for Esquire — a sharp editorial identity built on classic typography, generous spacing and a confident black-and-cream palette.",
-    year: "2024",
-    images: [work3, work4, work5, work1],
+      "Esquire is a luxury apartment complex I manage — and the brand, visuals and environmental design are mine end-to-end. Drawing on hands-on experience in real estate and property, the identity pairs a confident display serif with a tactile ornamental motif and a black-and-cream palette to signal quiet, lived-in luxury.",
+    year: "2026",
+    images: [esquire01, esquire02, work5, work1],
   },
   {
     id: "ghana70",
