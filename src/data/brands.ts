@@ -10,6 +10,8 @@ import danna04 from "@/assets/brands/danna-bakes-04.webp";
 import hydrasen01 from "@/assets/brands/hydrasen-01.webp";
 import hydrasen02 from "@/assets/brands/hydrasen-02.webp";
 import hydrasen05 from "@/assets/brands/hydrasen-05.webp";
+import dannaPkg03 from "@/assets/brands/danna-bakes-pkg-03.webp";
+import dannaPkg04 from "@/assets/brands/danna-bakes-pkg-04.webp";
 
 export type Brand = {
   id: string;
@@ -95,13 +97,13 @@ export const editorialBrands: Brand[] = [
 // Packaging — 4 brands × 4 images each
 export const packagingBrands: Brand[] = [
   {
-    id: "bdove-pkg",
-    name: "B/Dove Apothecary",
-    headline: "Refillable glass, debossed paper, soft labels.",
+    id: "danna-bakes-pkg",
+    name: "Danna Bakes",
+    headline: "Sweet packaging that carries the craving home.",
     subtext:
-      "Lorem ipsum dolor sit amet. A primary, secondary and shipper system for a 12-SKU skincare line.",
-    year: "2025",
-    images: [work5, work1, work2, work3],
+      "Packaging system for Danna Bakes — gable boxes, cupcake carriers and seasonal collateral built around a confident pink palette, playful display type and tactile patterns. Each piece is designed to make the bakery experience travel as well as the cakes do.",
+    year: "2024",
+    images: [danna01, danna02, dannaPkg03, dannaPkg04],
   },
   {
     id: "hydrasen-pkg",
