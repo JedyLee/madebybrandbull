@@ -14,6 +14,8 @@ import dannaPkg03 from "@/assets/brands/danna-bakes-pkg-03.webp";
 import dannaPkg04 from "@/assets/brands/danna-bakes-pkg-04.webp";
 import esquire01 from "@/assets/brands/esquire-01.webp";
 import esquire02 from "@/assets/brands/esquire-02.webp";
+import cassona01 from "@/assets/brands/cassona-01.webp";
+import cassona02 from "@/assets/brands/cassona-02.webp";
 
 export type Brand = {
   id: string;
@@ -82,8 +84,8 @@ export const editorialBrands: Brand[] = [
     headline: "Slow architecture, on uncoated cream stock.",
     subtext:
       "Lorem ipsum dolor sit amet. Quarterly editorial system, typographic grid and cover art-direction.",
-    year: "2024",
-    images: [work3, work2],
+    year: "2025 — 2026",
+    images: [cassona01, cassona02],
   },
   {
     id: "modern-pages-editorial",
