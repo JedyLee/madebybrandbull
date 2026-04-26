@@ -60,13 +60,41 @@ const tiers: Array<{
 ];
 
 const Pricing = () => {
+  const { currency, setCurrency, format, available } = useCurrency();
+
   return (
     <>
       <section className="container pt-12 md:pt-20 pb-10">
-        <div className="eyebrow text-muted-foreground">Engagements & rates</div>
-        <h1 className="display-bold text-6xl md:text-[9rem] mt-4 leading-[0.85]">
-          Pricing.
-        </h1>
+        <div className="flex items-start justify-between gap-6 flex-wrap">
+          <div>
+            <div className="eyebrow text-muted-foreground">Engagements & rates</div>
+            <h1 className="display-bold text-6xl md:text-[9rem] mt-4 leading-[0.85]">
+              Pricing.
+            </h1>
+          </div>
+          <div className="mt-2">
+            <div className="eyebrow text-muted-foreground mb-2">Currency</div>
+            <div className="flex flex-wrap gap-1">
+              {available.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCurrency(c as CurrencyCode)}
+                  className={`text-[11px] tracking-[0.2em] uppercase px-2.5 py-1.5 border transition-colors ${
+                    currency === c
+                      ? "bg-foreground text-background border-foreground"
+                      : "border-foreground/30 hover:border-foreground"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+            <p className="text-[11px] text-muted-foreground mt-2 max-w-[14rem]">
+              Detected from your location. Indicative — invoiced in EUR.
+            </p>
+          </div>
+        </div>
         <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground">
           Clear, fixed scopes. No subscriptions, no retainers. Every project
           begins with a free 30-minute call to make sure we&apos;re a good fit.
