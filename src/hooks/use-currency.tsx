@@ -32,8 +32,6 @@ const COUNTRY_TO_CURRENCY: Record<string, CurrencyCode> = {
   GH: "GHS",
 };
 
-const STORAGE_KEY = "bb-currency";
-
 const detectFromTimezone = (): CurrencyCode | null => {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
@@ -52,13 +50,6 @@ export const useCurrency = () => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const stored = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
-    if (stored && stored in CURRENCIES) {
-      setCurrencyState(stored as CurrencyCode);
-      setReady(true);
-      return;
-    }
-
     let cancelled = false;
 
     const tzGuess = detectFromTimezone();
@@ -85,11 +76,6 @@ export const useCurrency = () => {
       cancelled = true;
     };
   }, []);
-
-  const setCurrency = (code: CurrencyCode) => {
-    localStorage.setItem(STORAGE_KEY, code);
-    setCurrencyState(code);
-  };
 
   const config = CURRENCIES[currency];
 
@@ -125,10 +111,8 @@ export const useCurrency = () => {
 
   return {
     currency,
-    setCurrency,
     format,
     ready,
-    available: Object.keys(CURRENCIES) as CurrencyCode[],
     symbol: config.symbol,
   };
 };
