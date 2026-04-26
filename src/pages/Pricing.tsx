@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
+import { useCurrency, type CurrencyCode } from "@/hooks/use-currency";
 
-const tiers = [
+// Base prices in EUR. The active currency is detected from the visitor's location.
+const tiers: Array<{
+  name: string;
+  priceEur: number | null; // null = "On request"
+  cadence: string;
+  summary: string;
+  items: string[];
+  timeline: string;
+  featured?: boolean;
+}> = [
   {
     name: "Essential",
-    price: "€2,400",
+    priceEur: 2400,
     cadence: "starting at",
     summary: "For founders and small studios needing a confident visual base.",
     items: [
@@ -18,7 +28,7 @@ const tiers = [
   },
   {
     name: "Studio",
-    price: "€6,800",
+    priceEur: 6800,
     cadence: "starting at",
     summary: "A complete identity for brands ready to launch with intention.",
     items: [
@@ -34,7 +44,7 @@ const tiers = [
   },
   {
     name: "Editorial",
-    price: "On request",
+    priceEur: null,
     cadence: "by quote",
     summary: "Magazines, books and long-form publications, art-directed end-to-end.",
     items: [
