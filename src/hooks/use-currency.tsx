@@ -5,22 +5,16 @@ export type CurrencyCode = "EUR" | "USD" | "CHF" | "GBP" | "GHS";
 type CurrencyConfig = {
   code: CurrencyCode;
   symbol: string;
-  // Approximate conversion rate from 1 EUR (base currency of listed prices).
-  // Static rates — accurate enough for indicative pricing.
-  rate: number;
-  // Round to nearest N to keep prices clean.
-  roundTo: number;
-  // Symbol placement
   position: "prefix" | "suffix";
   locale: string;
 };
 
 const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
-  EUR: { code: "EUR", symbol: "€",   rate: 1,      roundTo: 100,  position: "prefix", locale: "fr-FR" },
-  USD: { code: "USD", symbol: "$",   rate: 1.08,   roundTo: 100,  position: "prefix", locale: "en-US" },
-  CHF: { code: "CHF", symbol: "CHF", rate: 0.96,   roundTo: 100,  position: "prefix", locale: "de-CH" },
-  GBP: { code: "GBP", symbol: "£",   rate: 0.85,   roundTo: 100,  position: "prefix", locale: "en-GB" },
-  GHS: { code: "GHS", symbol: "GH₵", rate: 16.5,   roundTo: 1000, position: "prefix", locale: "en-GH" },
+  EUR: { code: "EUR", symbol: "€",   position: "prefix", locale: "fr-FR" },
+  USD: { code: "USD", symbol: "$",   position: "prefix", locale: "en-US" },
+  CHF: { code: "CHF", symbol: "₣",   position: "prefix", locale: "de-CH" },
+  GBP: { code: "GBP", symbol: "£",   position: "prefix", locale: "en-GB" },
+  GHS: { code: "GHS", symbol: "GH₵", position: "prefix", locale: "en-GH" },
 };
 
 // Map ISO country codes to our supported currencies.
@@ -58,7 +52,6 @@ export const useCurrency = () => {
       setReady(true);
     }
 
-    // Confirm with IP-based geolocation (free, no key).
     fetch("https://ipapi.co/json/")
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
@@ -80,29 +73,20 @@ export const useCurrency = () => {
   const config = CURRENCIES[currency];
 
   /**
-   * Convert a EUR price into the active currency.
-   * Accepts a number (EUR amount) or a string like "€2,400".
-   * Returns a formatted string. Non-numeric strings (e.g. "On request") pass through.
+   * Format a price object keyed by currency. Falls back to EUR if the active
+   * currency isn't in the map. Non-numeric values pass through.
    */
-  const format = (value: number | string): string => {
-    let eur: number | null = null;
+  const formatPrice = (
+    prices: Partial<Record<CurrencyCode, number>> | string | null
+  ): string => {
+    if (prices === null) return "On request";
+    if (typeof prices === "string") return prices;
 
-    if (typeof value === "number") {
-      eur = value;
-    } else {
-      const cleaned = value.replace(/[^\d.,]/g, "").replace(/,/g, "");
-      const parsed = parseFloat(cleaned);
-      if (!Number.isNaN(parsed) && parsed > 0) eur = parsed;
-    }
-
-    if (eur === null) return typeof value === "string" ? value : String(value);
-
-    const converted = eur * config.rate;
-    const rounded = Math.round(converted / config.roundTo) * config.roundTo;
+    const amount = prices[currency] ?? prices.EUR ?? 0;
 
     const formatted = new Intl.NumberFormat(config.locale, {
       maximumFractionDigits: 0,
-    }).format(rounded);
+    }).format(amount);
 
     return config.position === "prefix"
       ? `${config.symbol}${formatted}`
@@ -111,7 +95,7 @@ export const useCurrency = () => {
 
   return {
     currency,
-    format,
+    formatPrice,
     ready,
     symbol: config.symbol,
   };
