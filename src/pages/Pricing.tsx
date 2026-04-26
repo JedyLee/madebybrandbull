@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { useCurrency } from "@/hooks/use-currency";
 
 // Base prices in EUR. The active currency is detected from the visitor's location.
@@ -130,6 +130,120 @@ const Pricing = () => {
             </article>
           ))}
         </div>
+      </section>
+
+      {/* Premium / Signature tier */}
+      <section className="container pt-16">
+        <article
+          className="relative overflow-hidden border border-[#c9a84c]/40 p-8 md:p-14"
+          style={{
+            background:
+              "linear-gradient(135deg, #1a1408 0%, #2a1f0a 25%, #4a3815 50%, #2a1f0a 75%, #0d0a05 100%)",
+            boxShadow:
+              "0 30px 80px -20px rgba(201,168,76,0.35), inset 0 1px 0 rgba(240,215,140,0.2)",
+          }}
+        >
+          {/* Decorative gold shimmer overlay */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-40"
+            style={{
+              background:
+                "radial-gradient(circle at 80% 20%, rgba(240,215,140,0.25) 0%, transparent 50%), radial-gradient(circle at 10% 90%, rgba(201,168,76,0.2) 0%, transparent 45%)",
+            }}
+          />
+
+          <div className="relative grid md:grid-cols-12 gap-10 items-start">
+            <div className="md:col-span-7">
+              <div
+                className="inline-flex items-center gap-2 px-3 py-1 text-[10px] tracking-[0.2em] uppercase border"
+                style={{
+                  borderColor: "rgba(240,215,140,0.5)",
+                  color: "#f0d78c",
+                  background: "rgba(240,215,140,0.05)",
+                }}
+              >
+                <Sparkles className="h-3 w-3" />
+                By invitation
+              </div>
+
+              <h2
+                className="display-bold text-5xl md:text-7xl mt-6 leading-[0.9]"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #f5e6a8 0%, #f0d78c 30%, #c9a84c 60%, #f0d78c 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Signature.
+              </h2>
+
+              <p className="mt-6 text-base md:text-lg max-w-lg" style={{ color: "rgba(245,230,168,0.85)" }}>
+                A bespoke, end-to-end engagement for established brands and
+                ambitious founders. Direct collaboration with our creative
+                director, full strategic immersion, and unlimited scope within
+                a defined timeline.
+              </p>
+
+              <ul className="mt-10 space-y-4 text-sm" style={{ color: "rgba(245,230,168,0.9)" }}>
+                {[
+                  "Dedicated creative director + senior team",
+                  "Brand strategy & market positioning",
+                  "Identity, packaging, digital & spatial design",
+                  "Custom typography & art direction",
+                  "Launch campaign & rollout supervision",
+                  "12 months of post-launch advisory",
+                ].map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <Check className="h-4 w-4 mt-0.5 shrink-0" style={{ color: "#f0d78c" }} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="md:col-span-5 md:pl-8 md:border-l" style={{ borderColor: "rgba(240,215,140,0.2)" }}>
+              <div className="eyebrow opacity-70" style={{ color: "#f0d78c" }}>
+                Investment
+              </div>
+              <div
+                className="display-bold text-5xl md:text-6xl mt-3"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #f5e6a8 0%, #f0d78c 50%, #c9a84c 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {format(24000)}+
+              </div>
+              <div className="text-xs mt-2" style={{ color: "rgba(245,230,168,0.6)" }}>
+                starting at · 12—20 weeks
+              </div>
+
+              <Link
+                to="/contact"
+                className="mt-10 inline-flex items-center justify-center w-full px-5 py-4 text-sm tracking-wide transition-all hover:opacity-90"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #f0d78c 0%, #c9a84c 100%)",
+                  color: "#1a1408",
+                  fontWeight: 600,
+                  boxShadow: "0 10px 30px -10px rgba(201,168,76,0.6)",
+                }}
+              >
+                Request an introduction →
+              </Link>
+
+              <p className="mt-6 text-[11px] tracking-wide" style={{ color: "rgba(245,230,168,0.55)" }}>
+                Limited to four engagements per year. Subject to creative fit.
+              </p>
+            </div>
+          </div>
+        </article>
       </section>
 
       <section className="container pt-20 pb-8">
