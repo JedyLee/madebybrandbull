@@ -119,7 +119,9 @@ const Pricing = () => {
               <h2 className="display-bold text-4xl mt-4">{t.name}</h2>
 
               <div className="mt-6 flex items-baseline gap-2">
-                <span className="display-bold text-5xl">{t.price}</span>
+                <span className="display-bold text-5xl">
+                  {t.priceEur === null ? "On request" : format(t.priceEur)}
+                </span>
               </div>
               <div className={`text-xs mt-1 ${t.featured ? "opacity-70" : "text-muted-foreground"}`}>
                 {t.cadence} · {t.timeline}
