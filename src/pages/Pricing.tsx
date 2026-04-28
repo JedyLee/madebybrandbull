@@ -16,7 +16,7 @@ const tiers: Array<{
 }> = [
   {
     name: "Essential",
-    prices: { EUR: 540, USD: 500, GBP: 535, CHF: 495, GHS: 8500 },
+    prices: { EUR: 540, USD: 500, GBP: 535, CHF: 495, GHS: 500 },
     cadence: "starting at",
     summary: "For founders and small studios needing a visual base.",
     items: [
@@ -29,7 +29,7 @@ const tiers: Array<{
   },
   {
     name: "Studio",
-    prices: { EUR: 1232, USD: 1200, GBP: 1235, CHF: 1202, GHS: 19000 },
+    prices: { EUR: 1232, USD: 1200, GBP: 1235, CHF: 1202, GHS: 3200 },
     cadence: "starting at",
     summary: "A complete identity & marketing plan.",
     items: [
@@ -43,7 +43,7 @@ const tiers: Array<{
   },
   {
     name: "Editorial",
-    prices: { EUR: 3080, USD: 3000, GBP: 3005, CHF: 3040, GHS: 48000 },
+    prices: { EUR: 3080, USD: 3000, GBP: 3005, CHF: 3040, GHS: 5000 },
     cadence: "starting at",
     summary:
       "Magazines, books and long-form publications, art-directed end-to-end.",
@@ -62,8 +62,8 @@ const Pricing = () => {
   const { formatPrice } = useCurrency();
 
   // Premium tier prices
-  const signaturePrices: PriceMap = { EUR: 5002, USD: 5000, GBP: 5010, CHF: 5020, GHS: 79000 };
-  const platinumPrices: PriceMap = { EUR: 10005, USD: 10015, GBP: 10014, CHF: 10005, GHS: 158000 };
+  const signaturePrices: PriceMap = { EUR: 5002, USD: 5000, GBP: 5010, CHF: 5020, GHS: 22000 };
+  const platinumPrices: PriceMap = { EUR: 10005, USD: 10015, GBP: 10014, CHF: 10005, GHS: 75000 };
 
   return (
     <>

@@ -14,7 +14,7 @@ const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
   USD: { code: "USD", symbol: "$",   position: "prefix", locale: "en-US" },
   CHF: { code: "CHF", symbol: "₣",   position: "prefix", locale: "de-CH" },
   GBP: { code: "GBP", symbol: "£",   position: "prefix", locale: "en-GB" },
-  GHS: { code: "GHS", symbol: "GH₵", position: "prefix", locale: "en-GH" },
+  GHS: { code: "GHS", symbol: "¢", position: "prefix", locale: "en-GH" },
 };
 
 // Map ISO country codes to our supported currencies.
