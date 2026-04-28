@@ -43,7 +43,7 @@ const tiers: Array<{
   },
   {
     name: "Editorial",
-    prices: { EUR: 3080, USD: 3000, GBP: 3005, CHF: 3040, GHS: 48000 },
+    prices: { EUR: 3080, USD: 3000, GBP: 3005, CHF: 3040, GHS: 5000 },
     cadence: "starting at",
     summary:
       "Magazines, books and long-form publications, art-directed end-to-end.",
