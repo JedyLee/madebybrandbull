@@ -29,7 +29,7 @@ const tiers: Array<{
   },
   {
     name: "Studio",
-    prices: { EUR: 1232, USD: 1200, GBP: 1235, CHF: 1202, GHS: 19000 },
+    prices: { EUR: 1232, USD: 1200, GBP: 1235, CHF: 1202, GHS: 3200 },
     cadence: "starting at",
     summary: "A complete identity & marketing plan.",
     items: [
