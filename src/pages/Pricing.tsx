@@ -16,7 +16,7 @@ const tiers: Array<{
 }> = [
   {
     name: "Essential",
-    prices: { EUR: 540, USD: 500, GBP: 535, CHF: 495, GHS: 8500 },
+    prices: { EUR: 540, USD: 500, GBP: 535, CHF: 495, GHS: 500 },
     cadence: "starting at",
     summary: "For founders and small studios needing a visual base.",
     items: [
