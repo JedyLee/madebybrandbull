@@ -62,8 +62,8 @@ const Pricing = () => {
   const { formatPrice } = useCurrency();
 
   // Premium tier prices
-  const signaturePrices: PriceMap = { EUR: 5002, USD: 5000, GBP: 5010, CHF: 5020, GHS: 79000 };
-  const platinumPrices: PriceMap = { EUR: 10005, USD: 10015, GBP: 10014, CHF: 10005, GHS: 158000 };
+  const signaturePrices: PriceMap = { EUR: 5002, USD: 5000, GBP: 5010, CHF: 5020, GHS: 22000 };
+  const platinumPrices: PriceMap = { EUR: 10005, USD: 10015, GBP: 10014, CHF: 10005, GHS: 75000 };
 
   return (
     <>
