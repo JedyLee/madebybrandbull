@@ -80,6 +80,7 @@ export const SiteFooter = () => {
             <li><Link to="/" className="hover:underline">Index</Link></li>
             <li><Link to="/work" className="hover:underline">Work</Link></li>
             <li><Link to="/pricing" className="hover:underline">Pricing</Link></li>
+            <li><Link to="/journal" className="hover:underline">Journal</Link></li>
             <li><Link to="/contact" className="hover:underline">Contact</Link></li>
           </ul>
         </div>
