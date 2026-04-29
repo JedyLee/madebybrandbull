@@ -43,7 +43,7 @@ const tiers: Array<{
   },
   {
     name: "Editorial",
-    prices: { EUR: 3080, USD: 3000, GBP: 3005, CHF: 3040, GHS: 5000 },
+    prices: { EUR: 3080, USD: 3000, GBP: 3005, CHF: 3040, GHS: 6000 },
     cadence: "starting at",
     summary:
       "Magazines, books and long-form publications, art-directed end-to-end.",
@@ -63,7 +63,7 @@ const Pricing = () => {
 
   // Premium tier prices
   const signaturePrices: PriceMap = { EUR: 5002, USD: 5000, GBP: 5010, CHF: 5020, GHS: 22000 };
-  const platinumPrices: PriceMap = { EUR: 10005, USD: 10015, GBP: 10014, CHF: 10005, GHS: 75000 };
+  const platinumPrices: PriceMap = { EUR: 10005, USD: 10015, GBP: 10014, CHF: 10005, GHS: 85000 };
 
   return (
     <>
