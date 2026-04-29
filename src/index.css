@@ -56,6 +56,11 @@
   }
 
   .dark {
+    --paper: 0 0% 5%;
+    --paper-soft: 0 0% 10%;
+    --ink: 42 30% 96%;
+    --ink-soft: 42 20% 85%;
+
     --background: 0 0% 5%;
     --foreground: 42 30% 96%;
     --card: 0 0% 5%;
