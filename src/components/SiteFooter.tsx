@@ -58,7 +58,7 @@ export const SiteFooter = () => {
                   alt={c.name}
                   loading="lazy"
                   draggable={false}
-                  className="max-h-full max-w-[180px] md:max-w-[220px] w-auto object-contain opacity-80 hover:opacity-100 transition-opacity select-none pointer-events-none"
+                  className="max-h-full max-w-[180px] md:max-w-[220px] w-auto object-contain opacity-80 hover:opacity-100 transition-opacity select-none pointer-events-none dark:invert dark:brightness-200"
                 />
               </div>
             ))}
