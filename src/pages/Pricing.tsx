@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Check, Sparkles, Gem, Crown } from "lucide-react";
+import { Check, Sparkles, Gem, Crown, Code2, Layout, ShoppingCart, CalendarCheck, Users } from "lucide-react";
 import { useCurrency, type CurrencyCode } from "@/hooks/use-currency";
 
 // Per-currency prices (no conversion math — exact figures per region).
