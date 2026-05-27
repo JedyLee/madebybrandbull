@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Check, Sparkles, Gem, Crown } from "lucide-react";
+import { Check, Sparkles, Gem, Crown, Code2, Layout, ShoppingCart, CalendarCheck, Users } from "lucide-react";
 import { useCurrency, type CurrencyCode } from "@/hooks/use-currency";
 
 // Per-currency prices (no conversion math — exact figures per region).
@@ -58,8 +58,55 @@ const tiers: Array<{
   },
 ];
 
+const extraServices: Array<{
+  name: string;
+  summary: string;
+  icon: typeof Layout;
+  from: PriceMap;
+  to: PriceMap;
+}> = [
+  {
+    name: "Landing Page",
+    summary: "A single, high-converting page tailored to your brand.",
+    icon: Layout,
+    from: { USD: 150, GBP: 115, EUR: 135, CHF: 130, GHS: 980 },
+    to:   { USD: 400, GBP: 300, EUR: 360, CHF: 350, GHS: 2705 },
+  },
+  {
+    name: "Web Development",
+    summary: "Multi-page websites built to perform and scale.",
+    icon: Code2,
+    from: { USD: 400, GBP: 300, EUR: 360, CHF: 350, GHS: 2705 },
+    to:   { USD: 1200, GBP: 900, EUR: 1080, CHF: 1070, GHS: 8000 },
+  },
+  {
+    name: "E-commerce Development",
+    summary: "Full online stores with payments, inventory and CMS.",
+    icon: ShoppingCart,
+    from: { USD: 800, GBP: 600, EUR: 720, CHF: 641, GHS: 5100 },
+    to:   { USD: 3000, GBP: 2250, EUR: 2700, CHF: 2400, GHS: 19500 },
+  },
+  {
+    name: "Booking System",
+    summary: "Custom scheduling, reservations and calendar workflows.",
+    icon: CalendarCheck,
+    from: { USD: 2000, GBP: 1500, EUR: 1800, CHF: 1620, GHS: 13000 },
+    to:   { USD: 6000, GBP: 4500, EUR: 5400, CHF: 4815, GHS: 38540 },
+  },
+  {
+    name: "CRM System",
+    summary: "Bespoke client management tools tailored to your operations.",
+    icon: Users,
+    from: { USD: 2500, GBP: 1900, EUR: 2250, CHF: 2115, GHS: 17100 },
+    to:   { USD: 7000, GBP: 5250, EUR: 6300, CHF: 6010, GHS: 47000 },
+  },
+];
+
 const Pricing = () => {
   const { formatPrice } = useCurrency();
+
+  const formatRange = (from: PriceMap, to: PriceMap) =>
+    `${formatPrice(from)} – ${formatPrice(to)}`;
 
   // Premium tier prices
   const signaturePrices: PriceMap = { EUR: 5002, USD: 5000, GBP: 5010, CHF: 5020, GHS: 22000 };
@@ -385,6 +432,50 @@ const Pricing = () => {
           </div>
         </article>
       </section>
+
+      {/* ─────────────────────────  EXTRA SERVICES — Affiliate (Emma)  ───────────────────────── */}
+      <section className="container pt-20">
+        <div className="border-t border-foreground/15 pt-10">
+          <div className="flex items-end justify-between flex-wrap gap-4">
+            <div>
+              <div className="eyebrow text-muted-foreground">In collaboration</div>
+              <h3 className="display-bold text-4xl md:text-5xl mt-3">Extra Services.</h3>
+              <p className="mt-4 max-w-xl text-sm md:text-base text-muted-foreground">
+                Web design & development delivered by Emma, a trusted partner programmer.
+                Engaged through us for a seamless experience — same standards, same care.
+              </p>
+            </div>
+            <span className="eyebrow text-muted-foreground">Affiliate · Emma</span>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-foreground/15 border border-foreground/15">
+            {extraServices.map((s) => {
+              const Icon = s.icon;
+              return (
+                <article key={s.name} className="bg-background p-6 md:p-8 flex flex-col">
+                  <Icon className="h-5 w-5 text-muted-foreground" />
+                  <h4 className="display-bold text-xl mt-4">{s.name}</h4>
+                  <p className="mt-2 text-sm text-muted-foreground flex-1">{s.summary}</p>
+                  <div className="mt-6">
+                    <div className="display-bold text-2xl md:text-3xl">
+                      {formatRange(s.from, s.to)}
+                    </div>
+                    <div className="text-[11px] text-muted-foreground mt-1 tracking-wide">
+                      project range
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <p className="mt-8 text-sm md:text-base text-muted-foreground italic max-w-2xl">
+            Our service offerings are expanding. Additional roles, specialised support services
+            and enterprise solutions will be added progressively.
+          </p>
+        </div>
+      </section>
+
 
       <section className="container pt-20 pb-8">
         <div className="grid md:grid-cols-2 gap-10 border-t border-foreground/15 pt-10">
