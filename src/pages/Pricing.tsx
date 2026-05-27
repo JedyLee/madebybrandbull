@@ -386,6 +386,50 @@ const Pricing = () => {
         </article>
       </section>
 
+      {/* ─────────────────────────  EXTRA SERVICES — Affiliate (Emma)  ───────────────────────── */}
+      <section className="container pt-20">
+        <div className="border-t border-foreground/15 pt-10">
+          <div className="flex items-end justify-between flex-wrap gap-4">
+            <div>
+              <div className="eyebrow text-muted-foreground">In collaboration</div>
+              <h3 className="display-bold text-4xl md:text-5xl mt-3">Extra Services.</h3>
+              <p className="mt-4 max-w-xl text-sm md:text-base text-muted-foreground">
+                Web design & development delivered by Emma, a trusted partner programmer.
+                Engaged through us for a seamless experience — same standards, same care.
+              </p>
+            </div>
+            <span className="eyebrow text-muted-foreground">Affiliate · Emma</span>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-foreground/15 border border-foreground/15">
+            {extraServices.map((s) => {
+              const Icon = s.icon;
+              return (
+                <article key={s.name} className="bg-background p-6 md:p-8 flex flex-col">
+                  <Icon className="h-5 w-5 text-muted-foreground" />
+                  <h4 className="display-bold text-xl mt-4">{s.name}</h4>
+                  <p className="mt-2 text-sm text-muted-foreground flex-1">{s.summary}</p>
+                  <div className="mt-6">
+                    <div className="display-bold text-2xl md:text-3xl">
+                      {formatRange(s.from, s.to)}
+                    </div>
+                    <div className="text-[11px] text-muted-foreground mt-1 tracking-wide">
+                      project range
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <p className="mt-8 text-sm md:text-base text-muted-foreground italic max-w-2xl">
+            Our service offerings are expanding. Additional roles, specialised support services
+            and enterprise solutions will be added progressively.
+          </p>
+        </div>
+      </section>
+
+
       <section className="container pt-20 pb-8">
         <div className="grid md:grid-cols-2 gap-10 border-t border-foreground/15 pt-10">
           <div>
