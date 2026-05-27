@@ -58,8 +58,55 @@ const tiers: Array<{
   },
 ];
 
+const extraServices: Array<{
+  name: string;
+  summary: string;
+  icon: typeof Layout;
+  from: PriceMap;
+  to: PriceMap;
+}> = [
+  {
+    name: "Landing Page",
+    summary: "A single, high-converting page tailored to your brand.",
+    icon: Layout,
+    from: { USD: 150, GBP: 115, EUR: 135, CHF: 130, GHS: 980 },
+    to:   { USD: 400, GBP: 300, EUR: 360, CHF: 350, GHS: 2705 },
+  },
+  {
+    name: "Web Development",
+    summary: "Multi-page websites built to perform and scale.",
+    icon: Code2,
+    from: { USD: 400, GBP: 300, EUR: 360, CHF: 350, GHS: 2705 },
+    to:   { USD: 1200, GBP: 900, EUR: 1080, CHF: 1070, GHS: 8000 },
+  },
+  {
+    name: "E-commerce Development",
+    summary: "Full online stores with payments, inventory and CMS.",
+    icon: ShoppingCart,
+    from: { USD: 800, GBP: 600, EUR: 720, CHF: 641, GHS: 5100 },
+    to:   { USD: 3000, GBP: 2250, EUR: 2700, CHF: 2400, GHS: 19500 },
+  },
+  {
+    name: "Booking System",
+    summary: "Custom scheduling, reservations and calendar workflows.",
+    icon: CalendarCheck,
+    from: { USD: 2000, GBP: 1500, EUR: 1800, CHF: 1620, GHS: 13000 },
+    to:   { USD: 6000, GBP: 4500, EUR: 5400, CHF: 4815, GHS: 38540 },
+  },
+  {
+    name: "CRM System",
+    summary: "Bespoke client management tools tailored to your operations.",
+    icon: Users,
+    from: { USD: 2500, GBP: 1900, EUR: 2250, CHF: 2115, GHS: 17100 },
+    to:   { USD: 7000, GBP: 5250, EUR: 6300, CHF: 6010, GHS: 47000 },
+  },
+];
+
 const Pricing = () => {
   const { formatPrice } = useCurrency();
+
+  const formatRange = (from: PriceMap, to: PriceMap) =>
+    `${formatPrice(from)} – ${formatPrice(to)}`;
 
   // Premium tier prices
   const signaturePrices: PriceMap = { EUR: 5002, USD: 5000, GBP: 5010, CHF: 5020, GHS: 22000 };
