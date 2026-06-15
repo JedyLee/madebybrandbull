@@ -16,15 +16,15 @@ export const SiteHeader = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10">
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
       <div className="container flex items-center justify-between h-16 md:h-20">
         <Link
           to="/"
-          className="flex items-baseline gap-2 group"
+          className="flex items-baseline gap-3 group"
           onClick={() => setOpen(false)}
         >
-          <span className="display-bold text-xl md:text-2xl">Brand&nbsp;Bull</span>
-          <span className="hidden md:inline text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+          <span className="font-display italic font-light text-2xl md:text-3xl tracking-tight">Brand&nbsp;Bull</span>
+          <span className="hidden md:inline text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-light">
             Studio · Est. 2024
           </span>
         </Link>
@@ -36,7 +36,7 @@ export const SiteHeader = () => {
               to={l.to}
               end={l.end}
               className={({ isActive }) =>
-                `relative text-sm tracking-wide transition-opacity hover:opacity-100 ${
+                `relative text-[10px] tracking-[0.3em] uppercase font-light transition-opacity hover:opacity-100 ${
                   isActive ? "opacity-100" : "opacity-60"
                 }`
               }
@@ -90,7 +90,7 @@ export const SiteHeader = () => {
                 end={l.end}
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
-                  `display-bold text-3xl ${isActive ? "opacity-100" : "opacity-50"}`
+                  `font-display italic font-light text-4xl ${isActive ? "opacity-100" : "opacity-50"}`
                 }
               >
                 {l.label}.
