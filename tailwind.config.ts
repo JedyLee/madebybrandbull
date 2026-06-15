@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Outfit", "system-ui", "sans-serif"],
-        display: ["Outfit", "system-ui", "sans-serif"],
+        sans: ["Karla", "system-ui", "sans-serif"],
+        display: ["'Cormorant Garamond'", "serif"],
+        serif: ["'Cormorant Garamond'", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
