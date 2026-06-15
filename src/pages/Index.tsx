@@ -172,7 +172,7 @@ const Index = () => {
       </div>
 
       {/* Hero — full viewport, centered cinematic */}
-      <section className="relative min-h-[88vh] flex flex-col items-center justify-center px-8 overflow-hidden">
+      <section className="relative min-h-[55vh] md:min-h-[60vh] flex flex-col items-center justify-center px-8 overflow-hidden">
         <div className="relative z-10 text-center">
           <h1 className="display text-[18vw] md:text-[12vw] leading-[0.88] tracking-[-0.03em]">
             Form, function
@@ -186,7 +186,7 @@ const Index = () => {
       </section>
 
       {/* Intro — narrative */}
-      <section className="container py-32 md:py-48 grid grid-cols-12 gap-10">
+      <section className="container py-20 md:py-28 grid grid-cols-12 gap-10">
         <div className="col-span-12 md:col-span-3 pt-3">
           <p className="eyebrow text-muted-foreground">The Narrative</p>
         </div>
