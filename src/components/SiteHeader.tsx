@@ -4,11 +4,9 @@ import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 
 const links = [
-  { to: "/", label: "Index", end: true },
   { to: "/work", label: "Work" },
   { to: "/pricing", label: "Pricing" },
   { to: "/journal", label: "Journal" },
-  { to: "/contact", label: "Contact" },
 ];
 
 export const SiteHeader = () => {
@@ -16,16 +14,11 @@ export const SiteHeader = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10">
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <Link
-          to="/"
-          className="flex items-baseline gap-3 group"
-          onClick={() => setOpen(false)}
-        >
-          <span className="font-display italic font-light text-2xl md:text-3xl tracking-tight">Brand&nbsp;Bull</span>
-          <span className="hidden md:inline text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-light">
-            Studio · Est. 2024
+        <Link to="/" onClick={() => setOpen(false)} className="flex items-baseline gap-2 group">
+          <span className="font-display text-3xl md:text-4xl leading-none tracking-tight">
+            brand<span className="text-coral">bull</span>
           </span>
         </Link>
 
@@ -34,47 +27,32 @@ export const SiteHeader = () => {
             <NavLink
               key={l.to}
               to={l.to}
-              end={l.end}
               className={({ isActive }) =>
-                `relative text-[10px] tracking-[0.3em] uppercase font-light transition-opacity hover:opacity-100 ${
-                  isActive ? "opacity-100" : "opacity-60"
+                `text-xs uppercase tracking-[0.25em] font-medium transition-colors hover:text-coral ${
+                  isActive ? "text-coral" : "text-foreground/80"
                 }`
               }
             >
-              {({ isActive }) => (
-                <span className="inline-flex items-center gap-2">
-                  <span
-                    className={`inline-block h-1.5 w-1.5 rounded-full bg-foreground transition-opacity ${
-                      isActive ? "opacity-100" : "opacity-0"
-                    }`}
-                  />
-                  {l.label}
-                </span>
-              )}
+              {l.label}
             </NavLink>
           ))}
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="p-2 -mr-2 opacity-60 hover:opacity-100 transition-opacity"
+            className="p-2 opacity-70 hover:opacity-100 transition-opacity"
           >
             {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
+          <Link to="/contact" className="btn-coral">
+            Let&apos;s Talk →
+          </Link>
         </nav>
 
         <div className="md:hidden flex items-center gap-1">
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="p-2"
-          >
+          <button onClick={toggleTheme} aria-label="Toggle theme" className="p-2">
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
-          <button
-            className="p-2 -mr-2"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
+          <button className="p-2 -mr-2" onClick={() => setOpen((v) => !v)} aria-label="Toggle menu">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
@@ -87,15 +65,17 @@ export const SiteHeader = () => {
               <NavLink
                 key={l.to}
                 to={l.to}
-                end={l.end}
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
-                  `font-display italic font-light text-4xl ${isActive ? "opacity-100" : "opacity-50"}`
+                  `font-display text-5xl lowercase ${isActive ? "text-coral" : "text-foreground"}`
                 }
               >
-                {l.label}.
+                {l.label}
               </NavLink>
             ))}
+            <Link to="/contact" onClick={() => setOpen(false)} className="btn-coral self-start mt-2">
+              Let&apos;s Talk →
+            </Link>
           </nav>
         </div>
       )}
