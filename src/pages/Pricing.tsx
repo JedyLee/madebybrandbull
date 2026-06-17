@@ -116,7 +116,7 @@ const Pricing = () => {
     <>
       <section className="container pt-12 md:pt-20 pb-10">
         <div className="eyebrow text-muted-foreground">Engagements & rates</div>
-        <h1 className="display-bold text-6xl md:text-[9rem] mt-4 leading-[0.85]">
+        <h1 className="serif-display text-7xl md:text-[11rem] mt-4 leading-[0.85] text-[hsl(var(--coral))] drop-shadow-[2px_2px_0_hsl(var(--foreground))]">
           Pricing.
         </h1>
         <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground">
