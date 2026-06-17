@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Karla", "system-ui", "sans-serif"],
-        display: ["'Cormorant Garamond'", "serif"],
-        serif: ["'Cormorant Garamond'", "serif"],
+        sans: ["'DM Sans'", "system-ui", "sans-serif"],
+        display: ["'VT323'", "ui-monospace", "monospace"],
+        mono: ["'VT323'", "ui-monospace", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -32,6 +32,9 @@ export default {
           DEFAULT: "hsl(var(--ink))",
           soft: "hsl(var(--ink-soft))",
         },
+        coral: "hsl(var(--coral))",
+        teal: "hsl(var(--teal))",
+        lemon: "hsl(var(--lemon))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
