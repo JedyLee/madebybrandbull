@@ -1,7 +1,9 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, Lock } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import { useAuth } from "@/hooks/use-auth";
+
 
 const links = [
   { to: "/work", label: "Work" },
