@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { blogPosts } from "@/data/blog";
+import { supabase } from "@/integrations/supabase/client";
+
+type AnyPost = { slug: string; title: string; dek: string; category: string; date: string; readingTime: string; cover: string };
+
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", {
