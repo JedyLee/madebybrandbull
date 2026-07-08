@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   brandingBrands,
   editorialBrands,
@@ -6,6 +6,7 @@ import {
   fontSpecimens,
   type Brand,
 } from "@/data/brands";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Carousel,
   CarouselContent,
@@ -23,6 +24,9 @@ const sections = [
 ] as const;
 
 type SectionId = (typeof sections)[number]["id"];
+
+type SectionOverride = { id: string; title: string; description: string };
+
 
 const BrandBlock = ({ brand, index }: { brand: Brand; index: number }) => {
   const [api, setApi] = useState<CarouselApi>();
