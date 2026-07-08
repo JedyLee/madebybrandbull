@@ -207,6 +207,49 @@ const TypographySlider = () => {
 
 const Work = () => {
   const [filter, setFilter] = useState<SectionId | "All">("All");
+  const [dbBrands, setDbBrands] = useState<(Brand & { category: string; sort_order: number })[]>([]);
+  const [overrides, setOverrides] = useState<Record<string, SectionOverride>>({});
+
+  useEffect(() => {
+    (async () => {
+      const [{ data: brs }, { data: secs }] = await Promise.all([
+        supabase.from("work_brands").select("*").order("sort_order"),
+        supabase.from("work_sections").select("*"),
+      ]);
+      setDbBrands(
+        (brs ?? []).map((b: any) => ({
+          id: b.id,
+          name: b.name,
+          headline: b.headline,
+          subtext: b.subtext ?? "",
+          year: b.year ?? "",
+          images: (b.images ?? []).filter(Boolean),
+          category: b.category,
+          sort_order: b.sort_order,
+        }))
+      );
+      const map: Record<string, SectionOverride> = {};
+      (secs ?? []).forEach((s: any) => {
+        map[s.id] = { id: s.id, title: s.title, description: s.description ?? "" };
+      });
+      setOverrides(map);
+    })();
+  }, []);
+
+  const byCategory = useMemo(() => {
+    const groups: Record<string, Brand[]> = { branding: [], editorial: [], packaging: [], typography: [] };
+    dbBrands.forEach((b) => {
+      if (groups[b.category]) groups[b.category].push(b);
+    });
+    return groups;
+  }, [dbBrands]);
+
+  const merged = {
+    branding: [...brandingBrands, ...(byCategory.branding ?? [])],
+    editorial: [...editorialBrands, ...(byCategory.editorial ?? [])],
+    packaging: [...packagingBrands, ...(byCategory.packaging ?? [])],
+  } as const;
+
   const sectionRefs = useRef<Record<SectionId, HTMLDivElement | null>>({
     branding: null,
     editorial: null,
@@ -226,6 +269,9 @@ const Work = () => {
   };
 
   const isVisible = (id: SectionId) => filter === "All" || filter === id;
+  const heading = (id: SectionId, fallback: string) => overrides[id]?.title || fallback;
+  const intro = (id: SectionId) => overrides[id]?.description;
+
 
   return (
     <>
