@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   brandingBrands,
   editorialBrands,
@@ -6,6 +6,7 @@ import {
   fontSpecimens,
   type Brand,
 } from "@/data/brands";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Carousel,
   CarouselContent,
@@ -23,6 +24,9 @@ const sections = [
 ] as const;
 
 type SectionId = (typeof sections)[number]["id"];
+
+type SectionOverride = { id: string; title: string; description: string };
+
 
 const BrandBlock = ({ brand, index }: { brand: Brand; index: number }) => {
   const [api, setApi] = useState<CarouselApi>();
@@ -203,6 +207,49 @@ const TypographySlider = () => {
 
 const Work = () => {
   const [filter, setFilter] = useState<SectionId | "All">("All");
+  const [dbBrands, setDbBrands] = useState<(Brand & { category: string; sort_order: number })[]>([]);
+  const [overrides, setOverrides] = useState<Record<string, SectionOverride>>({});
+
+  useEffect(() => {
+    (async () => {
+      const [{ data: brs }, { data: secs }] = await Promise.all([
+        supabase.from("work_brands").select("*").order("sort_order"),
+        supabase.from("work_sections").select("*"),
+      ]);
+      setDbBrands(
+        (brs ?? []).map((b: any) => ({
+          id: b.id,
+          name: b.name,
+          headline: b.headline,
+          subtext: b.subtext ?? "",
+          year: b.year ?? "",
+          images: (b.images ?? []).filter(Boolean),
+          category: b.category,
+          sort_order: b.sort_order,
+        }))
+      );
+      const map: Record<string, SectionOverride> = {};
+      (secs ?? []).forEach((s: any) => {
+        map[s.id] = { id: s.id, title: s.title, description: s.description ?? "" };
+      });
+      setOverrides(map);
+    })();
+  }, []);
+
+  const byCategory = useMemo(() => {
+    const groups: Record<string, Brand[]> = { branding: [], editorial: [], packaging: [], typography: [] };
+    dbBrands.forEach((b) => {
+      if (groups[b.category]) groups[b.category].push(b);
+    });
+    return groups;
+  }, [dbBrands]);
+
+  const merged = {
+    branding: [...brandingBrands, ...(byCategory.branding ?? [])],
+    editorial: [...editorialBrands, ...(byCategory.editorial ?? [])],
+    packaging: [...packagingBrands, ...(byCategory.packaging ?? [])],
+  } as const;
+
   const sectionRefs = useRef<Record<SectionId, HTMLDivElement | null>>({
     branding: null,
     editorial: null,
@@ -222,6 +269,9 @@ const Work = () => {
   };
 
   const isVisible = (id: SectionId) => filter === "All" || filter === id;
+  const heading = (id: SectionId, fallback: string) => overrides[id]?.title || fallback;
+  const intro = (id: SectionId) => overrides[id]?.description;
+
 
   return (
     <>
@@ -265,77 +315,51 @@ const Work = () => {
 
       <section className="container pt-16 pb-12 space-y-20 md:space-y-28">
         {isVisible("branding") && (
-          <div
-            id="branding"
-            ref={(el) => (sectionRefs.current.branding = el)}
-            className="scroll-mt-28"
-          >
-            <div className="flex items-baseline justify-between mb-10">
-              <h2 className="display-bold text-4xl md:text-7xl">Branding.</h2>
-              <span className="eyebrow text-muted-foreground">
-                {String(brandingBrands.length).padStart(2, "0")} brands
-              </span>
+          <div id="branding" ref={(el) => (sectionRefs.current.branding = el)} className="scroll-mt-28">
+            <div className="flex items-baseline justify-between mb-4">
+              <h2 className="display-bold text-4xl md:text-7xl">{heading("branding", "Branding.")}</h2>
+              <span className="eyebrow text-muted-foreground">{String(merged.branding.length).padStart(2, "0")} brands</span>
             </div>
+            {intro("branding") && <p className="text-muted-foreground max-w-2xl mb-10">{intro("branding")}</p>}
             <div className="space-y-16 md:space-y-24">
-              {brandingBrands.map((b, i) => (
-                <BrandBlock key={b.id} brand={b} index={i} />
-              ))}
+              {merged.branding.map((b, i) => (<BrandBlock key={b.id} brand={b} index={i} />))}
             </div>
           </div>
         )}
 
         {isVisible("editorial") && (
-          <div
-            id="editorial"
-            ref={(el) => (sectionRefs.current.editorial = el)}
-            className="scroll-mt-28"
-          >
-            <div className="flex items-baseline justify-between mb-10">
-              <h2 className="display-bold text-4xl md:text-7xl">Editorial.</h2>
-              <span className="eyebrow text-muted-foreground">
-                {String(editorialBrands.length).padStart(2, "0")} brands
-              </span>
+          <div id="editorial" ref={(el) => (sectionRefs.current.editorial = el)} className="scroll-mt-28">
+            <div className="flex items-baseline justify-between mb-4">
+              <h2 className="display-bold text-4xl md:text-7xl">{heading("editorial", "Editorial.")}</h2>
+              <span className="eyebrow text-muted-foreground">{String(merged.editorial.length).padStart(2, "0")} brands</span>
             </div>
+            {intro("editorial") && <p className="text-muted-foreground max-w-2xl mb-10">{intro("editorial")}</p>}
             <div className="space-y-16 md:space-y-24">
-              {editorialBrands.map((b, i) => (
-                <BrandBlock key={b.id} brand={b} index={i} />
-              ))}
+              {merged.editorial.map((b, i) => (<BrandBlock key={b.id} brand={b} index={i} />))}
             </div>
           </div>
         )}
 
         {isVisible("packaging") && (
-          <div
-            id="packaging"
-            ref={(el) => (sectionRefs.current.packaging = el)}
-            className="scroll-mt-28"
-          >
-            <div className="flex items-baseline justify-between mb-10">
-              <h2 className="display-bold text-4xl md:text-7xl">Packaging.</h2>
-              <span className="eyebrow text-muted-foreground">
-                {String(packagingBrands.length).padStart(2, "0")} brands
-              </span>
+          <div id="packaging" ref={(el) => (sectionRefs.current.packaging = el)} className="scroll-mt-28">
+            <div className="flex items-baseline justify-between mb-4">
+              <h2 className="display-bold text-4xl md:text-7xl">{heading("packaging", "Packaging.")}</h2>
+              <span className="eyebrow text-muted-foreground">{String(merged.packaging.length).padStart(2, "0")} brands</span>
             </div>
+            {intro("packaging") && <p className="text-muted-foreground max-w-2xl mb-10">{intro("packaging")}</p>}
             <div className="space-y-16 md:space-y-24">
-              {packagingBrands.map((b, i) => (
-                <BrandBlock key={b.id} brand={b} index={i} />
-              ))}
+              {merged.packaging.map((b, i) => (<BrandBlock key={b.id} brand={b} index={i} />))}
             </div>
           </div>
         )}
 
         {isVisible("typography") && (
-          <div
-            id="typography"
-            ref={(el) => (sectionRefs.current.typography = el)}
-            className="scroll-mt-28"
-          >
-            <div className="flex items-baseline justify-between mb-10">
-              <h2 className="display-bold text-4xl md:text-7xl">Typography.</h2>
-              <span className="eyebrow text-muted-foreground">
-                {String(fontSpecimens.length).padStart(2, "0")} typefaces
-              </span>
+          <div id="typography" ref={(el) => (sectionRefs.current.typography = el)} className="scroll-mt-28">
+            <div className="flex items-baseline justify-between mb-4">
+              <h2 className="display-bold text-4xl md:text-7xl">{heading("typography", "Typography.")}</h2>
+              <span className="eyebrow text-muted-foreground">{String(fontSpecimens.length).padStart(2, "0")} typefaces</span>
             </div>
+            {intro("typography") && <p className="text-muted-foreground max-w-2xl mb-10">{intro("typography")}</p>}
             <TypographySlider />
           </div>
         )}
@@ -343,5 +367,6 @@ const Work = () => {
     </>
   );
 };
+
 
 export default Work;

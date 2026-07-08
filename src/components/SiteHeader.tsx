@@ -1,7 +1,9 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, Lock } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import { useAuth } from "@/hooks/use-auth";
+
 
 const links = [
   { to: "/work", label: "Work" },
@@ -12,6 +14,10 @@ const links = [
 export const SiteHeader = () => {
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { session, isAdmin } = useAuth();
+  const adminHref = session && isAdmin ? "/admin" : "/admin/login";
+  const adminLabel = session && isAdmin ? "Admin" : "Sign in";
+
 
   return (
     <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10">
@@ -43,9 +49,11 @@ export const SiteHeader = () => {
           >
             {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
-          <Link to="/contact" className="btn-coral">
-            Let&apos;s Talk →
+          <Link to={adminHref} className="btn-coral">
+            <Lock className="h-4 w-4 mr-2 inline" />
+            {adminLabel} →
           </Link>
+
         </nav>
 
         <div className="md:hidden flex items-center gap-1">
@@ -73,9 +81,10 @@ export const SiteHeader = () => {
                 {l.label}
               </NavLink>
             ))}
-            <Link to="/contact" onClick={() => setOpen(false)} className="btn-coral self-start mt-2">
-              Let&apos;s Talk →
+            <Link to={adminHref} onClick={() => setOpen(false)} className="btn-coral self-start mt-2">
+              <Lock className="h-4 w-4 mr-2 inline" /> {adminLabel} →
             </Link>
+
           </nav>
         </div>
       )}
