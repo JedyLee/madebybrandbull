@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { blogPosts } from "@/data/blog";
 import { supabase } from "@/integrations/supabase/client";
 
 type AnyPost = { slug: string; title: string; dek: string; category: string; date: string; readingTime: string; cover: string };
@@ -15,7 +14,7 @@ const formatDate = (iso: string) =>
   });
 
 const Blog = () => {
-  const [dbPosts, setDbPosts] = useState<AnyPost[]>([]);
+  const [allPosts, setAllPosts] = useState<AnyPost[]>([]);
   useEffect(() => {
     supabase
       .from("journal_posts")
@@ -23,7 +22,7 @@ const Blog = () => {
       .eq("is_published", true)
       .order("published_date", { ascending: false })
       .then(({ data }) => {
-        setDbPosts(
+        setAllPosts(
           (data ?? []).map((p: any) => ({
             slug: p.slug,
             title: p.title,
@@ -31,12 +30,11 @@ const Blog = () => {
             category: p.category,
             date: p.published_date,
             readingTime: p.reading_time ?? "",
-            cover: p.cover_url ?? "https://images.unsplash.com/photo-1499933374294-4584851497cc?auto=format&fit=crop&w=1600&q=80",
+            cover: p.cover_url ?? "",
           }))
         );
       });
   }, []);
-  const allPosts: AnyPost[] = [...dbPosts, ...blogPosts];
   return (
 
     <>
