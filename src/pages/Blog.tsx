@@ -65,14 +65,16 @@ const Blog = () => {
                   reverse ? "md:order-2" : ""
                 }`}
               >
-                <img
-                  src={post.cover}
-                  alt={post.title}
-                  loading="lazy"
-                  width={1600}
-                  height={1100}
-                  className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
+                {post.cover ? (
+                  <img
+                    src={post.cover}
+                    alt={post.title}
+                    loading="lazy"
+                    className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                ) : (
+                  <div className="w-full aspect-[4/3] bg-paper-soft" />
+                )}
               </Link>
 
               <div
