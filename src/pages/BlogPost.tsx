@@ -23,7 +23,13 @@ type DbPost = {
 const SectionBlock = ({ s, isFirst }: { s: Section; isFirst: boolean }) => {
   if (s.type === "paragraph") {
     return (
-      <p className={`text-lg md:text-xl leading-[1.65] text-foreground/90 ${isFirst ? "first-letter:display-bold first-letter:text-6xl first-letter:float-left first-letter:mr-3 first-letter:leading-[0.85]" : ""}`}>
+      <p
+        className={`text-lg md:text-xl leading-[1.8] text-foreground/90 text-justify hyphens-auto whitespace-pre-line my-6 ${
+          isFirst
+            ? "first-letter:display-bold first-letter:text-6xl first-letter:float-left first-letter:mr-3 first-letter:leading-[0.85]"
+            : ""
+        }`}
+      >
         {s.text}
       </p>
     );
