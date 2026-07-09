@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { blogPosts, getPostBySlug, type BlogPost as StaticPost } from "@/data/blog";
+import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Section } from "@/pages/admin/AdminJournalEdit";
+
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
