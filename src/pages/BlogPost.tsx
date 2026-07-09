@@ -83,9 +83,7 @@ const BlogPostPage = () => {
 
   if (loading) return <div className="container py-20 text-muted-foreground">Loading…</div>;
 
-  const staticPost: StaticPost | undefined = !dbPost && slug ? getPostBySlug(slug) : undefined;
-
-  if (!dbPost && !staticPost) {
+  if (!dbPost) {
     return (
       <section className="container py-32 text-center">
         <div className="eyebrow text-muted-foreground">404 · Story</div>
@@ -97,38 +95,25 @@ const BlogPostPage = () => {
     );
   }
 
-  const view = dbPost
-    ? {
-        title: dbPost.title,
-        dek: dbPost.dek,
-        category: dbPost.category,
-        date: dbPost.published_date,
-        readingTime: dbPost.reading_time,
-        cover: dbPost.cover_url,
-        author: dbPost.author,
-        sections: dbPost.sections,
-      }
-    : {
-        title: staticPost!.title,
-        dek: staticPost!.dek,
-        category: staticPost!.category,
-        date: staticPost!.date,
-        readingTime: staticPost!.readingTime,
-        cover: staticPost!.cover,
-        author: staticPost!.author,
-        sections: staticPost!.body.map<Section>((t, i) => ({ id: String(i), type: "paragraph", text: t })),
-      };
-
-  const related = blogPosts.filter((p) => p.slug !== slug).slice(0, 2);
+  const view = {
+    title: dbPost.title,
+    dek: dbPost.dek,
+    category: dbPost.category,
+    date: dbPost.published_date,
+    readingTime: dbPost.reading_time,
+    cover: dbPost.cover_url,
+    author: dbPost.author,
+    sections: dbPost.sections,
+  };
 
   return (
     <>
-      <section className="container pt-12 md:pt-16 pb-10">
+      <section className="container pt-12 md:pt-16 pb-8">
         <Link to="/journal" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-muted-foreground hover:text-foreground transition-colors">
           <ArrowLeft className="h-3.5 w-3.5" /> Journal
         </Link>
-        <div className="mt-10 max-w-4xl">
-          <div className="eyebrow text-muted-foreground flex items-center gap-3 flex-wrap">
+        <div className="mt-8 max-w-3xl mx-auto text-center">
+          <div className="eyebrow text-muted-foreground flex items-center justify-center gap-3 flex-wrap">
             <span>{view.category}</span>
             <span className="h-px w-8 bg-foreground/30" />
             <span>{formatDate(view.date)}</span>
@@ -139,57 +124,31 @@ const BlogPostPage = () => {
               </>
             )}
           </div>
-          <h1 className="display-bold text-5xl md:text-8xl mt-6 leading-[0.9]">{view.title}</h1>
-          {view.dek && <p className="mt-6 text-lg md:text-2xl text-muted-foreground leading-relaxed max-w-2xl">{view.dek}</p>}
+          <h1 className="display-bold text-4xl md:text-6xl mt-5 leading-[0.95]">{view.title}</h1>
+          {view.dek && <p className="mt-5 text-base md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">{view.dek}</p>}
         </div>
       </section>
 
       {view.cover && (
         <section className="container">
-          <div className="bg-paper-soft overflow-hidden">
-            <img src={view.cover} alt={view.title} className="w-full aspect-[16/9] object-cover" />
+          <div className="max-w-4xl mx-auto bg-paper-soft overflow-hidden">
+            <img src={view.cover} alt={view.title} className="w-full max-h-[60vh] object-cover" />
           </div>
         </section>
       )}
 
-      <section className="container py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-14">
-          <aside className="md:col-span-3">
-            <div className="md:sticky md:top-28 space-y-4">
-              <div><div className="eyebrow text-muted-foreground">Author</div><div className="mt-2 text-sm">{view.author}</div></div>
-              <div><div className="eyebrow text-muted-foreground">Filed in</div><div className="mt-2 text-sm">{view.category}</div></div>
-            </div>
-          </aside>
-          <div className="md:col-span-8 md:col-start-5 space-y-6 max-w-2xl">
-            {view.sections.map((s, i) => (
-              <SectionBlock key={s.id ?? i} s={s} isFirst={i === 0 && s.type === "paragraph"} />
-            ))}
+      <section className="container py-12 md:py-16">
+        <div className="max-w-2xl mx-auto space-y-6">
+          <div className="eyebrow text-muted-foreground flex items-center gap-3">
+            <span>By {view.author}</span>
+            <span className="h-px w-8 bg-foreground/30" />
+            <span>{view.category}</span>
           </div>
+          {view.sections.map((s, i) => (
+            <SectionBlock key={s.id ?? i} s={s} isFirst={i === 0 && s.type === "paragraph"} />
+          ))}
         </div>
       </section>
-
-      {related.length > 0 && (
-        <section className="container border-t border-foreground/15 py-16 md:py-24">
-          <div className="flex items-baseline justify-between mb-10">
-            <h2 className="display-bold text-3xl md:text-5xl">Keep reading.</h2>
-            <Link to="/journal" className="text-xs uppercase tracking-[0.2em] border-b border-foreground pb-1">All stories</Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14">
-            {related.map((r) => (
-              <Link key={r.slug} to={`/journal/${r.slug}`} className="group block">
-                <div className="overflow-hidden bg-paper-soft">
-                  <img src={r.cover} alt={r.title} loading="lazy" className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                </div>
-                <div className="eyebrow text-muted-foreground mt-5">{r.category} · {formatDate(r.date)}</div>
-                <h3 className="display-bold text-2xl md:text-3xl mt-3 leading-tight group-hover:opacity-70 transition-opacity">{r.title}</h3>
-                <span className="inline-flex items-center gap-2 mt-4 text-xs uppercase tracking-[0.2em]">
-                  Read story <ArrowUpRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
     </>
   );
 };
