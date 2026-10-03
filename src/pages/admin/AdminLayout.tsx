@@ -38,6 +38,8 @@ const AdminLayout = () => {
         <NavLink to="/admin" end className={linkCls}>Overview</NavLink>
         <NavLink to="/admin/work" className={linkCls}>Work</NavLink>
         <NavLink to="/admin/journal" className={linkCls}>Journal</NavLink>
+        <NavLink to="/admin/media" className={linkCls}>Site images</NavLink>
+        <NavLink to="/admin/music" className={linkCls}>Music</NavLink>
       </nav>
       <Outlet />
     </section>

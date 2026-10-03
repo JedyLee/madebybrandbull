@@ -14,8 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["'DM Sans'", "system-ui", "sans-serif"],
-        display: ["'VT323'", "ui-monospace", "monospace"],
+        sans: ["'Montserrat'", "system-ui", "sans-serif"],
+        display: ["'Montserrat'", "system-ui", "sans-serif"],
+        script: ["'Mrs Saint Delafield'", "cursive"],
+        heavy: ["'Montserrat'", "system-ui", "sans-serif"],
         mono: ["'VT323'", "ui-monospace", "monospace"],
       },
       colors: {
