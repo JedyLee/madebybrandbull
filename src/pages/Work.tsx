@@ -1,3 +1,4 @@
+import { MediaSlot } from "@/lib/site-media";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   brandingBrands,
@@ -275,18 +276,15 @@ const Work = () => {
 
   return (
     <>
-      <section className="container pt-12 md:pt-20 pb-10">
-        <div className="eyebrow text-muted-foreground">
-          Brand Bull · Index of works · 2019—2026
-        </div>
-        <h1 className="display-bold text-6xl md:text-[10rem] mt-4 leading-[0.85]">
-          Work.
-        </h1>
-        <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground">
-          A selection of identity, editorial, packaging and type projects from
-          Brand Bull. Each is developed in close collaboration with the people
-          behind it.
+      <section className="container max-w-5xl pt-12 md:pt-20 pb-16 text-center">
+        <h1 className="text-3xl md:text-5xl">The Journey Ahead</h1>
+        <p className="mt-4 mx-auto max-w-xl text-sm text-muted-foreground">
+          Identity, editorial, packaging and type projects — each developed in close collaboration with the people behind it.
         </p>
+      </section>
+      <MediaSlot k="home_band" className="!rounded-none h-32 md:h-44 w-full" />
+      <section className="container max-w-5xl py-16 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        {Array.from({ length: 6 }, (_, i) => <MediaSlot key={i} k={`work_tile_${i + 1}`} className="aspect-square bg-muted" />)}
       </section>
 
       <section className="container sticky top-0 z-30 bg-background/90 backdrop-blur-sm">
