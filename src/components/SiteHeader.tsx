@@ -1,93 +1,48 @@
 import { NavLink, Link } from "react-router-dom";
-import { useState } from "react";
-import { Menu, X, Moon, Sun, Lock } from "lucide-react";
+import { Home, Briefcase, Info, Music2, Moon, Sun, Lock } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import { useAuth } from "@/hooks/use-auth";
 
-
-const links = [
-  { to: "/work", label: "Work" },
+const icons = [
+  { to: "/", label: "Home", Icon: Home, end: true },
+  { to: "/work", label: "Work", Icon: Briefcase },
+  { to: "/about", label: "About", Icon: Info },
+  { to: "/music", label: "Music", Icon: Music2 },
+];
+const text = [
   { to: "/pricing", label: "Pricing" },
   { to: "/journal", label: "Journal" },
 ];
 
 export const SiteHeader = () => {
-  const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { session, isAdmin } = useAuth();
   const adminHref = session && isAdmin ? "/admin" : "/admin/login";
-  const adminLabel = session && isAdmin ? "Admin" : "Sign in";
-
 
   return (
-    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10">
-      <div className="container flex items-center justify-between h-16 md:h-20">
-        <Link to="/" onClick={() => setOpen(false)} className="flex items-baseline gap-2 group">
-          <span className="font-display text-3xl md:text-4xl leading-none tracking-tight">
-            brand<span className="text-coral">bull</span>
-          </span>
-        </Link>
-
-        <nav className="hidden md:flex items-center gap-10">
-          {links.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              className={({ isActive }) =>
-                `text-xs uppercase tracking-[0.25em] font-medium transition-colors hover:text-coral ${
-                  isActive ? "text-coral" : "text-foreground/80"
-                }`
-              }
-            >
+    <header className="relative z-40 bg-background">
+      <div className="container pt-6 pb-4 flex flex-col items-center gap-4">
+        <Link to="/" className="font-script text-2xl leading-none">Jedidiah Ingram</Link>
+        <nav className="flex items-center gap-6">
+          {icons.map(({ to, label, Icon, end }) => (
+            <NavLink key={to} to={to} end={end} aria-label={label} title={label}
+              className={({ isActive }) => `p-1 transition-colors ${isActive ? "text-coral" : "text-foreground hover:text-coral"}`}>
+              <Icon className="h-5 w-5" strokeWidth={1.5} />
+            </NavLink>
+          ))}
+        </nav>
+        <div className="flex items-center gap-5 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+          {text.map((l) => (
+            <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? "text-foreground" : "hover:text-foreground")}>
               {l.label}
             </NavLink>
           ))}
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="p-2 opacity-70 hover:opacity-100 transition-opacity"
-          >
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          <button onClick={toggleTheme} aria-label="Toggle theme" className="hover:text-foreground">
+            {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
           </button>
-          <Link to={adminHref} className="btn-coral">
-            <Lock className="h-4 w-4 mr-2 inline" />
-            {adminLabel} →
-          </Link>
-
-        </nav>
-
-        <div className="md:hidden flex items-center gap-1">
-          <button onClick={toggleTheme} aria-label="Toggle theme" className="p-2">
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
-          <button className="p-2 -mr-2" onClick={() => setOpen((v) => !v)} aria-label="Toggle menu">
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <Link to={adminHref} aria-label="Admin" className="hover:text-foreground"><Lock className="h-3.5 w-3.5" /></Link>
         </div>
       </div>
-
-      {open && (
-        <div className="md:hidden border-t border-foreground/10 bg-background">
-          <nav className="container py-6 flex flex-col gap-5">
-            {links.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                onClick={() => setOpen(false)}
-                className={({ isActive }) =>
-                  `font-display text-5xl lowercase ${isActive ? "text-coral" : "text-foreground"}`
-                }
-              >
-                {l.label}
-              </NavLink>
-            ))}
-            <Link to={adminHref} onClick={() => setOpen(false)} className="btn-coral self-start mt-2">
-              <Lock className="h-4 w-4 mr-2 inline" /> {adminLabel} →
-            </Link>
-
-          </nav>
-        </div>
-      )}
     </header>
   );
 };
