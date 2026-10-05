@@ -13,9 +13,9 @@ const Index = () => (
   <>
     <section className="container max-w-5xl pt-10 md:pt-16">
       <div className="relative">
-        <span className="font-script absolute -top-8 md:-top-14 left-0 text-6xl md:text-9xl z-10 leading-none">Jedidiah</span>
+        <span className="font-script absolute -top-8 md:-top-14 left-0 text-6xl md:text-9xl z-10 leading-none text-background mix-blend-difference dark:mix-blend-normal dark:text-foreground">Jedidiah</span>
         <MediaSlot k="home_hero" alt="Jedidiah Ingram" className="!rounded-none aspect-[16/9] mx-auto w-[88%] grayscale" />
-        <span className="font-script absolute -bottom-8 md:-bottom-14 right-0 text-6xl md:text-9xl z-10 leading-none">Ingram</span>
+        <span className="font-script absolute -bottom-8 md:-bottom-14 right-0 text-6xl md:text-9xl z-10 leading-none text-background mix-blend-difference dark:mix-blend-normal dark:text-foreground">Ingram</span>
       </div>
     </section>
 
