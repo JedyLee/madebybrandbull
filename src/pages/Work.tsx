@@ -1,4 +1,6 @@
 import { MediaSlot } from "@/lib/site-media";
+import { ClientSlider } from "@/components/ClientSlider";
+import { ReadingBooks } from "@/components/ReadingBooks";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   brandingBrands,
@@ -282,7 +284,8 @@ const Work = () => {
           Identity, editorial, packaging and type projects — each developed in close collaboration with the people behind it.
         </p>
       </section>
-      <MediaSlot k="home_band" className="!rounded-none h-32 md:h-44 w-full" />
+      <ClientSlider dark />
+      <ReadingBooks />
       <section className="container max-w-5xl py-16 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
         {Array.from({ length: 6 }, (_, i) => <MediaSlot key={i} k={`work_tile_${i + 1}`} className="aspect-square bg-muted" />)}
       </section>

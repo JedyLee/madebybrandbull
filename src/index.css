@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Jane Austen';
+  src: url('/__l5e/assets-v1/09fcccad-03d2-4c83-8456-80be888262db/JaneAust.ttf') format('truetype');
+  font-display: swap;
+}
+
 /* Pixel & Paper — Nextec-inspired editorial design system.
    All colors MUST be HSL. */
 
