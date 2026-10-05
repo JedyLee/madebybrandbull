@@ -31,7 +31,7 @@ const AdminMusic = () => {
     } catch (e: any) { toast.error(e.message); } finally { setBusy(false); }
   };
 
-  const update = async (id: string, patch: Record<string, unknown>) => { await supabase.from("music_tracks").update(patch).eq("id", id); refresh(); };
+  const update = async (id: string, patch: { cover_url?: string; is_published?: boolean }) => { await supabase.from("music_tracks").update(patch).eq("id", id); refresh(); };
   const remove = async (id: string) => { if (confirm("Delete this track?")) { await supabase.from("music_tracks").delete().eq("id", id); refresh(); } };
 
   const input = "w-full border border-foreground/20 bg-transparent px-3 py-2 text-sm";
