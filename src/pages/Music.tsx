@@ -3,6 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Pause, Play } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { MediaSlot } from "@/lib/site-media";
+import { Button } from "@/components/ui/button";
+import useEmblaCarousel from "embla-carousel-react";
+import AutoScroll from "embla-carousel-auto-scroll";
 
 const fmt = (s: number) => (isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}` : "0:00");
 
@@ -19,9 +22,19 @@ const Music = () => {
   const [playing, setPlaying] = useState(false);
   const [t, setT] = useState({ cur: 0, dur: 0 });
   const track = tracks.find((x) => x.id === current);
+  const releases = tracks.reduce<{ title: string; cover: string | null; tracks: typeof tracks }[]>((list, item) => {
+    const title = item.album_title?.trim() || item.title;
+    const existing = list.find((release) => release.title === title);
+    if (existing) existing.tracks.push(item);
+    else list.push({ title, cover: item.cover_url, tracks: [item] });
+    return list;
+  }, []);
+  const scroll = useRef(AutoScroll({ speed: 1, stopOnInteraction: false, stopOnMouseEnter: true }));
+  const [galleryRef] = useEmblaCarousel({ loop: releases.length > 3, dragFree: true, align: "start" }, [scroll.current]);
 
   const toggle = (id: string) => {
-    const a = audio.current!;
+    const a = audio.current;
+    if (!a) return;
     if (current === id) { playing ? a.pause() : a.play(); return; }
     const tr = tracks.find((x) => x.id === id);
     if (!tr?.audio_url) return;
@@ -44,8 +57,25 @@ const Music = () => {
         <p className="relative font-script text-lg text-muted-foreground">sound by Jedidiah Ingram</p>
       </section>
 
-      <section className="container grid grid-cols-4 md:grid-cols-7 gap-4 md:gap-8">
-        {Array.from({ length: 7 }, (_, i) => <MediaSlot key={i} k={`music_strip_${i + 1}`} className={`aspect-square !rounded-xl ${i > 3 ? "hidden md:block" : ""}`} />)}
+      <section className="container" aria-label="Music releases">
+        <div ref={galleryRef} className="overflow-hidden cursor-grab active:cursor-grabbing">
+          <div className="flex -ml-4 md:-ml-6 py-2">
+            {releases.length ? releases.map((release) => (
+              <div key={release.title} className="pl-4 md:pl-6 shrink-0 basis-1/2 sm:basis-1/3 lg:basis-1/5 min-w-0">
+                <Button variant="ghost" onClick={() => toggle(release.tracks[0].id)} disabled={!release.tracks[0].audio_url} aria-label={`Play ${release.title}`} className="group block p-0 h-auto w-full text-left whitespace-normal rounded-md hover:bg-transparent">
+                  <div className="aspect-square bg-foreground overflow-hidden rounded-md relative">
+                    {release.cover && <img src={release.cover} alt={`Cover art for ${release.title}`} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />}
+                    <span className="absolute right-3 bottom-3 bg-background text-foreground rounded-full p-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity"><Play className="h-4 w-4" /></span>
+                  </div>
+                  <span className="block mt-3 text-xs uppercase tracking-widest text-foreground leading-relaxed">{release.title}</span>
+                  {release.tracks.length > 1 && <span className="block mt-1 text-xs text-muted-foreground">{release.tracks.length} tracks</span>}
+                </Button>
+              </div>
+            )) : Array.from({ length: 7 }, (_, i) => (
+              <div key={i} className="pl-4 md:pl-6 shrink-0 basis-1/2 sm:basis-1/3 lg:basis-1/7 min-w-0"><div className="aspect-square rounded-md bg-foreground" aria-hidden="true" /></div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="container py-24 grid md:grid-cols-[1fr_1.4fr_1fr] gap-10 items-center">
@@ -77,10 +107,10 @@ const Music = () => {
                 </div>
                 <span className="flex-1 text-xs uppercase tracking-[0.2em]">{tr.title}</span>
                 <span className="hidden sm:block text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{tr.release_label}</span>
-                <button onClick={() => toggle(tr.id)} disabled={!tr.audio_url} aria-label={active ? "Pause" : "Play"}
+                 <Button variant="ghost" onClick={() => toggle(tr.id)} disabled={!tr.audio_url} aria-label={active ? "Pause" : "Play"}
                   className="w-14 h-7 rounded-full bg-muted flex items-center justify-center hover:bg-foreground hover:text-background transition-colors disabled:opacity-40">
                   {active ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-                </button>
+                 </Button>
               </div>
             );
           })}
@@ -98,7 +128,7 @@ const Music = () => {
 
       {track && (
         <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 rounded-full bg-foreground text-background px-5 py-2.5 shadow-lg">
-          <button onClick={() => toggle(track.id)} aria-label="Play or pause">{playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}</button>
+          <Button variant="ghost" size="icon" className="text-background hover:text-foreground" onClick={() => toggle(track.id)} aria-label="Play or pause">{playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}</Button>
           <span className="text-xs uppercase tracking-[0.2em] max-w-[40vw] truncate">{track.title}</span>
           <span className="text-xs font-mono tabular-nums opacity-70">{fmt(t.cur)} / {fmt(t.dur)}</span>
         </div>

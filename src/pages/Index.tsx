@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { MediaSlot } from "@/lib/site-media";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { ClientSlider } from "@/components/ClientSlider";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const faqs = [
   { q: "What do you actually offer?", a: "Brand strategy, logo and identity systems, editorial and magazine design, packaging, and guidelines — plus web design and development through my affiliate partner." },
@@ -9,7 +12,17 @@ const faqs = [
   { q: "What do you charge for work?", a: "Packages start at Essential and scale to Signature and Platinum. Prices are shown in your local currency on the pricing page." },
 ];
 
-const Index = () => (
+const Index = () => {
+  const { data: editedFaqs = [] } = useQuery({
+    queryKey: ["site_faqs"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("site_faqs").select("*").order("sort_order");
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+  const displayedFaqs = editedFaqs.length ? editedFaqs.map((f) => ({ q: f.question, a: f.answer })) : faqs;
+  return (
   <>
     <section className="container max-w-5xl pt-10 md:pt-16">
       <div className="relative">
@@ -25,7 +38,7 @@ const Index = () => (
       </h1>
     </section>
 
-    <MediaSlot k="home_band" className="!rounded-none h-40 md:h-56 w-full" />
+    <ClientSlider dark />
 
     <section className="container max-w-5xl py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center">
       <MediaSlot k="home_portrait" alt="Portrait" className="aspect-[4/5] grayscale" />
@@ -44,7 +57,7 @@ const Index = () => (
       <p className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground">FAQ</p>
       <h2 className="text-center text-2xl md:text-3xl mt-2 mb-10">Before you book</h2>
       <Accordion type="single" collapsible>
-        {faqs.map((f) => (
+        {displayedFaqs.map((f) => (
           <AccordionItem key={f.q} value={f.q}>
             <AccordionTrigger className="text-sm font-normal">{f.q}</AccordionTrigger>
             <AccordionContent className="text-sm text-muted-foreground">{f.a}</AccordionContent>
@@ -53,6 +66,7 @@ const Index = () => (
       </Accordion>
     </section>
   </>
-);
+  );
+};
 
 export default Index;

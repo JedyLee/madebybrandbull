@@ -64,6 +64,7 @@ export type Database = {
       }
       music_tracks: {
         Row: {
+          album_title: string | null
           audio_url: string | null
           cover_url: string | null
           created_at: string
@@ -74,6 +75,7 @@ export type Database = {
           title: string
         }
         Insert: {
+          album_title?: string | null
           audio_url?: string | null
           cover_url?: string | null
           created_at?: string
@@ -84,6 +86,7 @@ export type Database = {
           title: string
         }
         Update: {
+          album_title?: string | null
           audio_url?: string | null
           cover_url?: string | null
           created_at?: string
@@ -92,6 +95,51 @@ export type Database = {
           release_label?: string | null
           sort_order?: number
           title?: string
+        }
+        Relationships: []
+      }
+      reading_books: {
+        Row: {
+          author: string | null
+          cover_url: string | null
+          id: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          author?: string | null
+          cover_url?: string | null
+          id?: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          author?: string | null
+          cover_url?: string | null
+          id?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      site_faqs: {
+        Row: {
+          answer: string
+          id: string
+          question: string
+          sort_order: number
+        }
+        Insert: {
+          answer: string
+          id?: string
+          question: string
+          sort_order?: number
+        }
+        Update: {
+          answer?: string
+          id?: string
+          question?: string
+          sort_order?: number
         }
         Relationships: []
       }

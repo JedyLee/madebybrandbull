@@ -8,6 +8,13 @@
       "when": 1791050106621,
       "tag": "0000_site_media_music",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791196293564,
+      "tag": "0001_editable_faq_books_album",
+      "breakpoints": true
     }
   ]
 }

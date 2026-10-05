@@ -16,7 +16,7 @@ export default {
       fontFamily: {
         sans: ["'Montserrat'", "system-ui", "sans-serif"],
         display: ["'Montserrat'", "system-ui", "sans-serif"],
-        script: ["'Mrs Saint Delafield'", "cursive"],
+        script: ["'Jane Austen'", "cursive"],
         heavy: ["'Montserrat'", "system-ui", "sans-serif"],
         mono: ["'VT323'", "ui-monospace", "monospace"],
       },
