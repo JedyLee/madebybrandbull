@@ -1,0 +1,15 @@
+CREATE TABLE public.site_faqs (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), question text NOT NULL, answer text NOT NULL, sort_order integer NOT NULL DEFAULT 0);
+GRANT SELECT ON public.site_faqs TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.site_faqs TO authenticated;
+GRANT ALL ON public.site_faqs TO service_role;
+ALTER TABLE public.site_faqs ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone reads FAQs" ON public.site_faqs FOR SELECT TO public USING (true);
+CREATE POLICY "Admin writes FAQs" ON public.site_faqs FOR ALL TO authenticated USING (public.is_admin()) WITH CHECK (public.is_admin());
+CREATE TABLE public.reading_books (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), title text NOT NULL, author text, cover_url text, sort_order integer NOT NULL DEFAULT 0);
+GRANT SELECT ON public.reading_books TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.reading_books TO authenticated;
+GRANT ALL ON public.reading_books TO service_role;
+ALTER TABLE public.reading_books ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone reads books" ON public.reading_books FOR SELECT TO public USING (true);
+CREATE POLICY "Admin writes books" ON public.reading_books FOR ALL TO authenticated USING (public.is_admin()) WITH CHECK (public.is_admin());
+ALTER TABLE public.music_tracks ADD COLUMN album_title text;
