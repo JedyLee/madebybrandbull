@@ -3,3 +3,6 @@
 - [x] Put client logo sliders beneath the Home and Work headlines.
 - [x] Make FAQ and books-read entries editable in admin; show books beneath Work slider.
 - [x] Verify public pages and the authenticated admin content screen.
+- [ ] Keep the music gallery moving even with one release and preserve transparent covers.
+- [ ] Confirm cover updates and add an editable music profile photo.
+- [ ] Replace displayed Brand Bull labels with Jedidiah and verify the music flow.

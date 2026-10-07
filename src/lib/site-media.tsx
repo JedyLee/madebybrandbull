@@ -8,6 +8,7 @@ export const MEDIA_SLOTS: { key: string; label: string; page: string }[] = [
   { key: "about_portrait", label: "About · image beside bio", page: "About" },
   { key: "about_wide", label: "About · wide image", page: "About" },
   ...Array.from({ length: 6 }, (_, i) => ({ key: `work_tile_${i + 1}`, label: `Work · tile ${i + 1}`, page: "Work" })),
+  { key: "music_profile", label: "Music · profile photo", page: "Music" },
   { key: "music_story_left", label: "Music · story image left", page: "Music" },
   { key: "music_story_right", label: "Music · story image right", page: "Music" },
   { key: "music_ack", label: "Music · acknowledgements image", page: "Music" },
