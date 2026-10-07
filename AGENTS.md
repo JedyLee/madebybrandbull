@@ -1,0 +1,1 @@
+Editable public content beyond Work and Journal belongs in focused admin screens backed by protected public tables, so site copy and collections remain manageable without code changes.

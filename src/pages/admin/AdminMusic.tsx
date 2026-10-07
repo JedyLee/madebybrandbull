@@ -11,6 +11,7 @@ const AdminMusic = () => {
     queryFn: async () => (await supabase.from("music_tracks").select("*").order("sort_order", { ascending: false })).data ?? [],
   });
   const [title, setTitle] = useState("");
+  const [album, setAlbum] = useState("");
   const [label, setLabel] = useState("");
   const [audio, setAudio] = useState<File | null>(null);
   const [cover, setCover] = useState<File | null>(null);
@@ -24,9 +25,9 @@ const AdminMusic = () => {
       const audio_url = await uploadImage(audio, "music");
       const cover_url = cover ? await uploadImage(cover, "music") : null;
       const sort_order = (tracks[0]?.sort_order ?? 0) + 1;
-      const { error } = await supabase.from("music_tracks").insert({ title, release_label: label || null, audio_url, cover_url, sort_order });
+      const { error } = await supabase.from("music_tracks").insert({ title, album_title: album || null, release_label: label || null, audio_url, cover_url, sort_order });
       if (error) throw error;
-      setTitle(""); setLabel(""); setAudio(null); setCover(null);
+      setTitle(""); setAlbum(""); setLabel(""); setAudio(null); setCover(null);
       toast.success("Track added"); refresh();
     } catch (e: any) { toast.error(e.message); } finally { setBusy(false); }
   };
@@ -40,6 +41,7 @@ const AdminMusic = () => {
       <div className="border border-foreground/15 p-6 grid md:grid-cols-2 gap-4">
         <h2 className="md:col-span-2 text-lg">Upload a new track</h2>
         <input className={input} placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input className={input} placeholder="Album or single name" value={album} onChange={(e) => setAlbum(e.target.value)} />
         <input className={input} placeholder="Release date, e.g. June 2025" value={label} onChange={(e) => setLabel(e.target.value)} />
         <label className="text-sm">Audio file (mp3, wav, m4a)
           <input type="file" accept="audio/*" className="block mt-1 text-xs" onChange={(e) => setAudio(e.target.files?.[0] ?? null)} />
@@ -56,6 +58,7 @@ const AdminMusic = () => {
             <div className="w-12 h-12 rounded-lg bg-foreground overflow-hidden">{t.cover_url && <img src={t.cover_url} alt="" className="w-full h-full object-cover" />}</div>
             <div className="flex-1 min-w-[200px]">
               <p className="text-sm">{t.title}</p>
+              {t.album_title && <p className="text-xs">{t.album_title}</p>}
               <p className="text-xs text-muted-foreground">{t.release_label}</p>
               {t.audio_url && <audio controls src={t.audio_url} className="mt-2 h-8 w-full max-w-sm" />}
             </div>
