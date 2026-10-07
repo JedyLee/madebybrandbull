@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, UserRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { MediaSlot } from "@/lib/site-media";
+import { MediaSlot, useSiteMedia } from "@/lib/site-media";
 import { Button } from "@/components/ui/button";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
@@ -10,6 +10,7 @@ import AutoScroll from "embla-carousel-auto-scroll";
 const fmt = (s: number) => (isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}` : "0:00");
 
 const Music = () => {
+  const { data: media } = useSiteMedia();
   const { data: tracks = [] } = useQuery({
     queryKey: ["music_tracks_public"],
     queryFn: async () => {
@@ -25,12 +26,18 @@ const Music = () => {
   const releases = tracks.reduce<{ title: string; cover: string | null; tracks: typeof tracks }[]>((list, item) => {
     const title = item.album_title?.trim() || item.title;
     const existing = list.find((release) => release.title === title);
-    if (existing) existing.tracks.push(item);
+    if (existing) { existing.tracks.push(item); existing.cover ||= item.cover_url; }
     else list.push({ title, cover: item.cover_url, tracks: [item] });
     return list;
   }, []);
-  const scroll = useRef(AutoScroll({ speed: 1, stopOnInteraction: false, stopOnMouseEnter: true }));
-  const [galleryRef] = useEmblaCarousel({ loop: releases.length > 3, dragFree: true, align: "start" }, [scroll.current]);
+  const galleryReleases = releases.length ? Array.from({ length: Math.max(2, Math.ceil(12 / releases.length)) }, () => releases).flat() : [];
+  const scroll = useRef(AutoScroll({ speed: 1, startDelay: 0, stopOnInteraction: false, stopOnMouseEnter: false }));
+  const [galleryRef, galleryApi] = useEmblaCarousel({ loop: true, dragFree: true, align: "start" }, [scroll.current]);
+  useEffect(() => {
+    if (!galleryApi || !releases.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    galleryApi.reInit();
+    galleryApi.plugins().autoScroll?.play();
+  }, [galleryApi, tracks]);
 
   const toggle = (id: string) => {
     const a = audio.current;
@@ -52,7 +59,9 @@ const Music = () => {
         <div className="absolute inset-0 flex items-center justify-between px-4 font-script text-6xl md:text-9xl text-foreground/10 pointer-events-none select-none">
           <span>Capella</span><span>Chandon</span>
         </div>
-        <div className="relative mx-auto w-24 h-24 md:w-28 md:h-28 rounded-full bg-destructive" />
+        <div className="relative mx-auto w-24 h-24 md:w-28 md:h-28 rounded-full bg-muted overflow-hidden flex items-center justify-center">
+          {media?.music_profile ? <img src={media.music_profile} alt="Jedidiah profile" className="w-full h-full object-cover" /> : <UserRound className="w-10 h-10 text-muted-foreground" />}
+        </div>
         <p className="relative mt-4 text-xs font-bold tracking-[0.2em]">CAPELLA CHANDON</p>
         <p className="relative font-script text-lg text-muted-foreground">sound by Jedidiah Ingram</p>
       </section>
@@ -60,11 +69,11 @@ const Music = () => {
       <section className="container" aria-label="Music releases">
         <div ref={galleryRef} className="overflow-hidden cursor-grab active:cursor-grabbing">
           <div className="flex -ml-4 md:-ml-6 py-2">
-            {releases.length ? releases.map((release) => (
-              <div key={release.title} className="pl-4 md:pl-6 shrink-0 basis-1/2 sm:basis-1/3 lg:basis-1/5 min-w-0">
+            {releases.length ? galleryReleases.map((release, index) => (
+              <div key={`${release.title}-${index}`} className="pl-4 md:pl-6 shrink-0 basis-1/2 sm:basis-1/3 lg:basis-1/5 min-w-0">
                 <Button variant="ghost" onClick={() => toggle(release.tracks[0].id)} disabled={!release.tracks[0].audio_url} aria-label={`Play ${release.title}`} className="group block p-0 h-auto w-full text-left whitespace-normal rounded-md hover:bg-transparent">
-                  <div className="aspect-square bg-foreground overflow-hidden rounded-md relative">
-                    {release.cover && <img src={release.cover} alt={`Cover art for ${release.title}`} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />}
+                  <div className={`aspect-square overflow-hidden rounded-md relative ${release.cover ? "bg-transparent" : "bg-muted"}`}>
+                    {release.cover && <img src={release.cover} alt={`Cover art for ${release.title}`} draggable={false} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" />}
                     <span className="absolute right-3 bottom-3 bg-background text-foreground rounded-full p-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity"><Play className="h-4 w-4" /></span>
                   </div>
                   <span className="block mt-3 text-xs uppercase tracking-widest text-foreground leading-relaxed">{release.title}</span>
@@ -102,8 +111,8 @@ const Music = () => {
             return (
               <div key={tr.id} className="flex items-center gap-4 md:gap-8 py-4">
                 <span className="text-[10px] text-muted-foreground w-8">{String(tracks.length - i).padStart(3, "0")}</span>
-                <div className="w-12 h-12 rounded-lg bg-foreground overflow-hidden shrink-0">
-                  {tr.cover_url && <img src={tr.cover_url} alt="" className="w-full h-full object-cover" />}
+                <div className="w-12 h-12 rounded-lg bg-transparent overflow-hidden shrink-0">
+                  {tr.cover_url && <img src={tr.cover_url} alt="" className="w-full h-full object-contain" />}
                 </div>
                 <span className="flex-1 text-xs uppercase tracking-[0.2em]">{tr.title}</span>
                 <span className="hidden sm:block text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{tr.release_label}</span>

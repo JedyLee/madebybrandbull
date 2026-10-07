@@ -68,7 +68,7 @@ export const SiteFooter = () => {
 
       <div className="container py-10 grid gap-8 md:grid-cols-4 text-sm">
         <div className="md:col-span-2">
-          <div className="display-bold text-2xl">Brand Bull</div>
+          <div className="display-bold text-2xl">Jedidiah</div>
           <p className="text-muted-foreground mt-2 max-w-sm">
             Independent graphic design studio working with founders, museums and
             considered brands.
@@ -95,7 +95,7 @@ export const SiteFooter = () => {
         </div>
       </div>
       <div className="container pb-8 flex flex-col md:flex-row md:justify-between gap-2 text-xs text-muted-foreground border-t border-foreground/10 pt-6">
-        <span>© {year} Brand Bull. All rights reserved.</span>
+        <span>© {year} Jedidiah. All rights reserved.</span>
         <span>Designed in Ghana · Printed on recycled paper.</span>
       </div>
     </footer>
