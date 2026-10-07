@@ -1,5 +1,5 @@
-- [ ] Use uploaded Jane Austen font for cursive text.
-- [ ] Turn music cover boxes into a sliding, playable release gallery; support album uploads.
-- [ ] Put client logo sliders beneath the Home and Work headlines.
-- [ ] Make FAQ and books-read entries editable in admin; show books beneath Work slider.
-- [ ] Verify public pages and an authenticated admin content change.
+- [x] Use uploaded Jane Austen font for cursive text.
+- [x] Turn music cover boxes into a sliding, playable release gallery; support album uploads.
+- [x] Put client logo sliders beneath the Home and Work headlines.
+- [x] Make FAQ and books-read entries editable in admin; show books beneath Work slider.
+- [x] Verify public pages and the authenticated admin content screen.
