@@ -22,6 +22,11 @@ const AdminHome = () => (
       <h2 className="display-bold text-3xl mt-3">Music</h2>
       <p className="mt-3 text-muted-foreground">Upload songs and covers to the Listen list on the Music page.</p>
     </Link>
+    <Link to="/admin/content" className="border border-foreground/20 p-8 hover:border-coral transition-colors block">
+      <div className="eyebrow text-muted-foreground">05</div>
+      <h2 className="display-bold text-3xl mt-3">FAQ & books</h2>
+      <p className="mt-3 text-muted-foreground">Edit the Home questions and the books shown below the Work client slider.</p>
+    </Link>
   </div>
 );
 

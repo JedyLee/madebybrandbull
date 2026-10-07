@@ -39,6 +39,7 @@ const AdminLayout = () => {
         <NavLink to="/admin/work" className={linkCls}>Work</NavLink>
         <NavLink to="/admin/journal" className={linkCls}>Journal</NavLink>
         <NavLink to="/admin/media" className={linkCls}>Site images</NavLink>
+        <NavLink to="/admin/content" className={linkCls}>FAQ & books</NavLink>
         <NavLink to="/admin/music" className={linkCls}>Music</NavLink>
       </nav>
       <Outlet />

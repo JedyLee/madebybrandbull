@@ -15,6 +15,7 @@ import About from "./pages/About.tsx";
 import Music from "./pages/Music.tsx";
 import AdminMedia from "./pages/admin/AdminMedia.tsx";
 import AdminMusic from "./pages/admin/AdminMusic.tsx";
+import AdminContent from "./pages/admin/AdminContent.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminLayout from "./pages/admin/AdminLayout.tsx";
@@ -49,6 +50,7 @@ const App = () => (
                 <Route path="journal" element={<AdminJournal />} />
                 <Route path="media" element={<AdminMedia />} />
                 <Route path="music" element={<AdminMusic />} />
+                <Route path="content" element={<AdminContent />} />
                 <Route path="journal/:id" element={<AdminJournalEdit />} />
               </Route>
             </Route>
