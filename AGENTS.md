@@ -1,1 +1,2 @@
 Editable public content beyond Work and Journal belongs in focused admin screens backed by protected public tables, so site copy and collections remain manageable without code changes.
+Music album cover replacements update every track in the same album and verify saved rows before confirming success, keeping the public gallery and admin previews consistent.

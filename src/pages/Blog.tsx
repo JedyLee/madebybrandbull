@@ -40,7 +40,7 @@ const Blog = () => {
     <>
       <section className="container pt-12 md:pt-20 pb-10">
         <div className="eyebrow text-muted-foreground">
-          Brand Bull · Journal · Est. 2024
+          Jedidiah · Journal · Est. 2024
         </div>
         <h1 className="display-bold text-6xl md:text-[10rem] mt-4 leading-[0.85]">
           Journal.
