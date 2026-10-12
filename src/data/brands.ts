@@ -144,7 +144,7 @@ export const fontSpecimens: FontSpecimen[] = [
     id: "outfit",
     name: "Outfit",
     classification: "Geometric Sans · Variable",
-    sample: "Brand Bull",
+    sample: "Jedidiah",
     fontFamily: "'Outfit', sans-serif",
     weight: 700,
   },

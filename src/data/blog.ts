@@ -21,7 +21,7 @@ export const blogPosts: BlogPost[] = [
     readingTime: "6 min read",
     cover:
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1600&q=80",
-    author: "Brand Bull Studio",
+    author: "Jedidiah",
     body: [
       "Trends are loud. Identity is quiet. The work that lasts rarely arrives announcing itself — it earns its presence through restraint, repetition and an almost stubborn point of view.",
       "When we begin a project at the studio, we ask one question before any sketching starts: what should still feel true about this brand in ten years? The answer becomes the spine. Everything else — palette, typography, motion — is muscle around that spine.",
@@ -37,7 +37,7 @@ export const blogPosts: BlogPost[] = [
     readingTime: "4 min read",
     cover:
       "https://images.unsplash.com/photo-1561070791-2526d30994b8?auto=format&fit=crop&w=1600&q=80",
-    author: "Brand Bull Studio",
+    author: "Jedidiah",
     body: [
       "A wordmark asks the typeface to do all the heavy lifting. There is nowhere to hide — no icon to lean on, no clever metaphor to distract.",
       "Done well, it becomes the brand. Think of the way certain names instantly summon a feeling before you even register what they sell. That is not luck; it is craft, kerned letter by letter.",
@@ -52,7 +52,7 @@ export const blogPosts: BlogPost[] = [
     readingTime: "3 min read",
     cover:
       "https://images.unsplash.com/photo-1499933374294-4584851497cc?auto=format&fit=crop&w=1600&q=80",
-    author: "Brand Bull Studio",
+    author: "Jedidiah",
     body: [
       "A short dispatch from the studio. New clients in Zürich and Accra, two editorial systems in production, and a typography library quietly expanding behind the scenes.",
       "We are also revisiting our approach to packaging — leaner, more tactile, with fewer layers between the object and the hand that holds it.",

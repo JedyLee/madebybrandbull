@@ -122,7 +122,7 @@ const TypographySlider = () => {
   return (
     <article className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 border-t border-foreground/15 pt-10 md:pt-14">
       <header className="md:col-span-4 md:sticky md:top-28 md:self-start">
-        <div className="eyebrow text-muted-foreground">Type library · Brand Bull</div>
+        <div className="eyebrow text-muted-foreground">Type library · Jedidiah</div>
         <h3 className="display-bold text-3xl md:text-5xl mt-3 leading-[0.95]">
           A curated set of typefaces, ready to dress your brand.
         </h3>
