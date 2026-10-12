@@ -6,6 +6,7 @@ import { MediaSlot, useSiteMedia } from "@/lib/site-media";
 import { Button } from "@/components/ui/button";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
+import { musicGallerySlots } from "@/lib/music-gallery";
 
 const fmt = (s: number) => (isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}` : "0:00");
 
@@ -30,7 +31,7 @@ const Music = () => {
     else list.push({ title, cover: item.cover_url, tracks: [item] });
     return list;
   }, []);
-  const galleryReleases = releases.length ? Array.from({ length: Math.max(2, Math.ceil(12 / releases.length)) }, () => releases).flat() : [];
+   const galleryReleases = musicGallerySlots(releases);
   const scroll = useRef(AutoScroll({ speed: 1, startDelay: 0, stopOnInteraction: false, stopOnMouseEnter: false }));
   const [galleryRef, galleryApi] = useEmblaCarousel({ loop: true, dragFree: true, align: "start" }, [scroll.current]);
   useEffect(() => {
@@ -69,7 +70,7 @@ const Music = () => {
       <section className="container" aria-label="Music releases">
         <div ref={galleryRef} className="overflow-hidden cursor-grab active:cursor-grabbing">
           <div className="flex -ml-4 md:-ml-6 py-2">
-            {releases.length ? galleryReleases.map((release, index) => (
+             {galleryReleases.map((release, index) => release ? (
               <div key={`${release.title}-${index}`} className="pl-4 md:pl-6 shrink-0 basis-1/2 sm:basis-1/3 lg:basis-1/5 min-w-0">
                 <Button variant="ghost" onClick={() => toggle(release.tracks[0].id)} disabled={!release.tracks[0].audio_url} aria-label={`Play ${release.title}`} className="group block p-0 h-auto w-full text-left whitespace-normal rounded-md hover:bg-transparent">
                   <div className={`aspect-square overflow-hidden rounded-md relative ${release.cover ? "bg-transparent" : "bg-muted"}`}>
@@ -80,8 +81,8 @@ const Music = () => {
                   {release.tracks.length > 1 && <span className="block mt-1 text-xs text-muted-foreground">{release.tracks.length} tracks</span>}
                 </Button>
               </div>
-            )) : Array.from({ length: 7 }, (_, i) => (
-              <div key={i} className="pl-4 md:pl-6 shrink-0 basis-1/2 sm:basis-1/3 lg:basis-1/7 min-w-0"><div className="aspect-square rounded-md bg-foreground" aria-hidden="true" /></div>
+             ) : (
+               <div key={`empty-${index}`} className="pl-4 md:pl-6 shrink-0 basis-1/2 sm:basis-1/3 lg:basis-1/5 min-w-0"><div className="aspect-square rounded-md bg-foreground" aria-hidden="true" /></div>
             ))}
           </div>
         </div>
@@ -91,7 +92,7 @@ const Music = () => {
         <MediaSlot k="music_story_left" className="aspect-[3/5] hidden md:block" />
         <div className="max-w-md mx-auto">
           <p className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Behind the sound</p>
-          <h2 className="text-center font-script text-5xl mt-2 mb-8">The Feels</h2>
+           <h2 className="text-center font-script text-4xl md:text-5xl leading-relaxed pt-8 mb-8">The Feels</h2>
           <div className="space-y-4 text-sm text-muted-foreground leading-relaxed text-justify">
             <p>Since childhood I've been captivated by music — learning melodies by ear and chasing that rich, warm sound long before I knew any theory.</p>
             <p>My love for technology grew alongside it. Coding, design and sound engineering all became part of the same craft: building something that feels right from every angle.</p>
@@ -103,7 +104,7 @@ const Music = () => {
 
       <section className="container max-w-4xl pb-24">
         <p className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground">All releases</p>
-        <h2 className="text-center font-script text-5xl mt-2 mb-12">Listen</h2>
+         <h2 className="text-center font-script text-4xl md:text-5xl leading-relaxed pt-8 mb-12">Listen</h2>
         {tracks.length === 0 && <p className="text-center text-sm text-muted-foreground">New releases coming soon.</p>}
         <div className="divide-y divide-border border-y border-border">
           {tracks.map((tr, i) => {
