@@ -15,7 +15,7 @@ const Music = () => {
   const { data: tracks = [] } = useQuery({
     queryKey: ["music_tracks_public"],
     queryFn: async () => {
-      const { data } = await supabase.from("music_tracks").select("*").eq("is_published", true).order("sort_order", { ascending: false });
+      const { data } = await supabase.from("music_tracks").select("*").eq("is_published", true).order("sort_order", { ascending: true });
       return data ?? [];
     },
   });
