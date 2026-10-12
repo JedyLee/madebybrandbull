@@ -6,4 +6,4 @@
 - [x] Keep the music gallery moving even with one release and preserve transparent covers.
 - [x] Confirm cover updates and add an editable music profile photo.
 - [x] Replace displayed Brand Bull labels with Jedidiah and verify the music flow.
-- [ ] Space music headings and show each release in one slot without repeated covers; verify sequential slots and sliding motion.
+- [x] Space music headings and show each release in one slot without repeated covers; verify sequential slots and sliding motion.
